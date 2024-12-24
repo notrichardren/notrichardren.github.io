@@ -168,7 +168,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
         "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude.",
-        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./APEX.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
+        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./APEX.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get around.</span>
       ],
       image: scatteringprobe
     },
@@ -179,7 +179,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function) on simulated data.",
-        < span key="pdf" > The article is published by a non-open- access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
+        < span key="pdf" > The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get around.</span>
       ],
       image: validml
     }
