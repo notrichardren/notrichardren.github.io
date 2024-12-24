@@ -106,6 +106,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       details: [
         "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, measuring the correlations of safety benchmark scores with compute and capabilities benchmarks across models.",
         "I was invited to present this work at the UK Government AI Safety Institute.",
+        <span key="links">Check out the <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">website</a>, <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">codebase</a>, and <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">twitter thread</a>.</span>
       ],
       image: safetywashing
     },
@@ -117,7 +118,8 @@ const HomePage = ({ onNavigateToAbout }) => {
       details: [
         "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. (in intermediate model layers) which could be used to steer the model's behavior as desired.",
         "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
-        "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM."
+        "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM.",
+        <span key="links">Check out the <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">website</a> and <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">codebase</a>.</span>
       ],
       image: repe
     },
@@ -138,7 +140,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
         "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude.",
-        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="/assets/APEX.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
+        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./APEX.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
       ],
       image: scatteringprobe
     },
@@ -149,7 +151,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function) on simulated data.",
-        < span key="pdf" > The article is published by a non-open- access journal, which there's unfortunately absolutely <a href="/assets/PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
+        < span key="pdf" > The article is published by a non-open- access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
       ],
       image: validml
     }
