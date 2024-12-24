@@ -40,6 +40,9 @@ const AboutPage = ({ onBack }) => {
         <p className="text-gray-700">
           I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News.
         </p>
+        {/* <p className="text-gray-700">
+          I also co-run <a href="https://pennai.notion.site/SafeAI-Penn-Labs-a4f262c3061b46d2975667c97b964ad3" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">SafeAI@Penn</a>.
+        </p> */}
       </section>
 
       <section className="mb-12">
@@ -132,8 +135,8 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "NeurIPS 2024 Datasets & Benchmarks Track",
       link: "http://www.arxiv.org/abs/2407.21792",
       details: [
-        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, measuring the correlations of safety benchmark scores with compute and capabilities benchmarks across models.",
-        "I was invited to present this work at the UK Government AI Safety Institute.",
+        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, covering eight topic areas (alignment, machine ethics, bias, misconceptions, calibration, scalable oversight, adversarial robustness, and weaponization capabilities). Measures the correlations of safety benchmark scores with pretraining compute and capabilities benchmarks across models. ",
+        <span key="invited">I was <a href="https://x.com/tomekkorbak/status/1828154620138660352" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">invited</a> to present this work at the UK Government AI Safety Institute.</span>,
         <span key="links">Links: <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
       ],
       image: safetywashing
@@ -145,8 +148,8 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "http://www.arxiv.org/abs/2310.01405",
       details: [
         "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. in intermediate model layers, which could be used to steer the model's behavior as desired.",
-        "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
-        "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM.",
+        <span key="citation">Cited by OpenAI's Superalignment Team's <a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Fast Grants page</a>, and has over 200 citations generally.</span>,
+        <span key="implementations">Techniques from the paper (e.g. RepControl) have been merged into <a href="https://github.com/ggerganov/llama.cpp/pull/5970" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">llama.cpp</a> and <a href="https://github.com/vllm-project/vllm/issues/3861" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">vLLM</a>.</span>,
         <span key="links">Links: <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
       ],
       image: repe
@@ -158,6 +161,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "http://www.arxiv.org/abs/2311.15131",
       details: [
         "We mechanistically investigate lying in a controlled setting by (a) engineering prompts to induce dishonest behavior, (b) training and transferring linear probes on intermediate model activations, and (c) causally patching activations.",
+        <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
       ],
       image: lll
     },
@@ -176,7 +180,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       title: "Validity of Machine Learning in the Quantitative Analysis of Complex Scanning Near-Field Optical Microscopy Signals Using Simulated Data (2021)",
       authors: ["Xinzhong Chen", "Richard Ren", "Mengkun Liu"],
       publication: "Physical Review Applied",
-      link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
+      link: "https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.15.014001",
       details: [
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function) on simulated data.",
         < span key="pdf" > The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get around.</span>
@@ -203,7 +207,6 @@ const HomePage = ({ onNavigateToAbout }) => {
         <p className="text-lg text-gray-700 mb-6">
           My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently co-authored the most comprehensive empirical meta-analysis of AI safety benchmarks to date.
         </p>
-
         <button
           onClick={onNavigateToAbout}
           className="text-blue-600 hover:text-blue-800 hover:underline mb-6 flex items-center"
@@ -249,7 +252,11 @@ const HomePage = ({ onNavigateToAbout }) => {
             {
               date: 'March 16, 2024',
               content: <>Technique introduced in research paper, control vectors, added to llama.cpp (<em>Representation Engineering</em>).</>
-            }
+            },
+            // {
+            //   date: 'December 14, 2023',
+            //   content: <>Paper cited by OpenAI's Superalignment Team under their Fast Grants Page (<em>Representation Engineering</em>).</>
+            // }
           ].map((item, index) => (
             <div key={index} className="flex">
               <span className="w-40 flex-shrink-0 font-medium">{item.date}</span>
