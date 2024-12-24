@@ -15,7 +15,7 @@ const AboutPage = ({ onBack }) => {
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Research Philosophy</h2>
         <p className="text-gray-700 mb-6">
-          I like to be rapid, iterative, and experimentally-focused. In my research, I like to aggressively prioritize, continually remodel my worldview based on the empirical evidence, and minimize entropy quickly. I've also found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
+          My research style is rapid, iterative, and experimentally-focused. In my research, I like to continually re-prioritize, remodel my worldview based on the empirical evidence, and minimize entropy quickly. I've also found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
         <p className="text-gray-700 mb-6">
           I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and potential new areas that the ML community at large is not focused on but could be <a href="https://www.youtube.com/watch?v=vtIzMaLkCaM" className="text-blue-600 hover:underline">valuable</a>.
@@ -91,9 +91,8 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "NeurIPS 2024 Datasets & Benchmarks Track",
       link: "http://www.arxiv.org/abs/2407.21792",
       details: [
-        "Co-1st author on the most comprehensive empirical meta-analysis of AI safety benchmarks to date.",
+        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date.",
         "I was invited to present this work at the UK Government AI Safety Institute.",
-        "Accepted to NeurIPS 2024 Datasets & Benchmarks Track."
       ],
       image: "https://placehold.co/200x150"
     },
@@ -103,7 +102,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "arXiv preprint arXiv:2310.01405",
       link: "http://www.arxiv.org/abs/2310.01405",
       details: [
-        "Co-2nd author / core contributor on a paper focusing on obtaining control vectors for concepts for dishonesty, morality, and fairness (in intermediate model layers) which could be used to steer the model's behavior as desired.",
+        "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. (in intermediate model layers) which could be used to steer the model's behavior as desired.",
         "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
         "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM."
       ],
@@ -115,9 +114,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "NeurIPS 2023 SoLaR Workshop",
       link: "http://www.arxiv.org/abs/2311.15131",
       details: [
-        "Co-1st author on a paper exploring instructed dishonesty in LLMs in a controlled setting.",
-        "By engineering prompts to induce dishonest behavior and training a linear probe on intermediate model activations, we isolated the layers responsible for dishonesty in our context, verified by causal methods.",
-        "Accepted to NeurIPS 2023 Socially Responsible Language Modelling Research Workshop."
+        "By engineering prompts to induce dishonest behavior, training a linear probe on intermediate model activations, and patching activations, we mechanistically investigate lying in a controlled setting.",
       ],
       image: "https://placehold.co/200x150"
     },
@@ -127,7 +124,6 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "Applied Physics Express",
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
-        "Published in Applied Physics Express.",
         "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude."
       ],
       image: "https://placehold.co/200x150"
@@ -138,7 +134,6 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "Physical Review Applied",
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
-        "Published in Physical Review Applied.",
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function)."
       ],
       image: "https://placehold.co/200x150"
@@ -155,10 +150,10 @@ const HomePage = ({ onNavigateToAbout }) => {
         />
         <h1 className="text-4xl font-bold mb-2">Richard Ren</h1>
         <p className="text-gray-600 italic mb-4">
-          {["professional silly goose", "prompt engineer of exceptional ability", "a high entropy researcher"][Math.floor(Math.random() * 3)]}
+          {["a professional silly goose", "a high entropy researcher"][Math.floor(Math.random() * 2)]}
         </p>
         <p className="text-lg text-gray-700 mb-4">
-          I'm a fourth-year undergraduate student at the Jerome Fisher M&T Program at the University of Pennsylvania. My research is on state-of-the-art foundation models, focusing on the science of model evaluations as well as steering model behaviors.
+          I'm a fourth-year undergraduate student at the Jerome Fisher M&T Program at the University of Pennsylvania. My research is the science of AI evaluations as well as steering model behaviors.
         </p>
         <p className="text-lg text-gray-700 mb-6">
           My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently conducted the largest empirical meta-analysis of AI safety benchmarks to date.
