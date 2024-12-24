@@ -63,7 +63,7 @@ const AboutPage = ({ onBack }) => {
           Then, I usually pick a research topic and find collaborators and go for it. Generally, I value informally figuring out your own research you want to do, and then diving into that space and talking to people there to build expertise. Pursue <em>those</em> research ideas – ones that you created, or ones that you think you vibe with, or offhand remarks from a professor or someone you talked to that you truly believe pose an interesting research question.
         </p>
         <p className="text-gray-700 mb-4">
-          In general, I'm a big fan of informal interactions for research, research mentorship, and research collaboration — above getting a posted RA position for a PhD student — but your mileage can vary. Other people have done the RA route and turned out great. You're much better off taking an approach of "I'm reading this paper, let me email them" over official posted positions. Make sure you're ambitious and focused on research that you truly believe in.
+          In general, I'm a big fan of informal interactions for research, research mentorship, and research collaboration — above getting a posted RA position for a PhD student — but your mileage can vary. Other people have done the RA route and turned out great. My belief is that you're much better off taking an approach of "I'm reading this paper I like, let me email them" over official posted positions. Make sure you're ambitious and focused on research that you truly believe in.
         </p>
         <p className="text-gray-700">
           I also really like this <a href="https://www.youtube.com/watch?v=vtIzMaLkCaM" className="text-blue-600 hover:underline">lecture</a> on how to present and write research.
@@ -157,7 +157,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "NeurIPS 2023 SoLaR Workshop",
       link: "http://www.arxiv.org/abs/2311.15131",
       details: [
-        "We mechanistically investigate lying in a controlled setting by (a) engineering prompts to induce dishonest behavior, (b) training a linear probe on intermediate model activations, and (c) causally patching activations.",
+        "We mechanistically investigate lying in a controlled setting by (a) engineering prompts to induce dishonest behavior, (b) training and transferring linear probes on intermediate model activations, and (c) causally patching activations.",
       ],
       image: lll
     },
