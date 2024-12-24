@@ -4,14 +4,14 @@ import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, Boo
 const AboutPage = ({ onBack }) => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
-      <button 
+      <button
         onClick={onBack}
         className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Home
       </button>
-      
+
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Research Philosophy</h2>
         <p className="text-gray-700 mb-6">
@@ -39,11 +39,11 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="border border-gray-200 rounded-lg p-4 mb-6 shadow-sm">
-      <a 
+      <a
         href={link}
         className="flex space-x-6"
       >
-        <img 
+        <img
           src={image}
           alt={title}
           className="w-48 h-36 object-cover rounded flex-shrink-0"
@@ -65,7 +65,7 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
           <p className="text-blue-600">{publication}</p>
         </div>
       </a>
-      <button 
+      <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="flex items-center text-blue-600 hover:text-blue-800 mt-2 w-full"
       >
@@ -95,7 +95,7 @@ const HomePage = ({ onNavigateToAbout }) => {
         "I was invited to present this work at the UK Government AI Safety Institute.",
         "Accepted to NeurIPS 2024 Datasets & Benchmarks Track."
       ],
-      image: "/api/placeholder/200/150"
+      image: "https://placehold.co/200x150"
     },
     {
       title: "Representation Engineering: A Top-Down Approach to AI Transparency (2023)",
@@ -107,7 +107,7 @@ const HomePage = ({ onNavigateToAbout }) => {
         "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
         "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM."
       ],
-      image: "/api/placeholder/200/150"
+      image: "https://placehold.co/200x150"
     },
     {
       title: "Localizing Lying in LLaMA: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
@@ -119,7 +119,7 @@ const HomePage = ({ onNavigateToAbout }) => {
         "By engineering prompts to induce dishonest behavior and training a linear probe on intermediate model activations, we isolated the layers responsible for dishonesty in our context, verified by causal methods.",
         "Accepted to NeurIPS 2023 Socially Responsible Language Modelling Research Workshop."
       ],
-      image: "/api/placeholder/200/150"
+      image: "https://placehold.co/200x150"
     },
     {
       title: "High-Efficiency Scattering Probe Design for S-Polarized Near-Field Microscopy (2021)",
@@ -130,7 +130,7 @@ const HomePage = ({ onNavigateToAbout }) => {
         "Published in Applied Physics Express.",
         "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude."
       ],
-      image: "/api/placeholder/200/150"
+      image: "https://placehold.co/200x150"
     },
     {
       title: "Validity of Machine Learning in the Quantitative Analysis of Complex Scanning Near-Field Optical Microscopy Signals Using Simulated Data (2021)",
@@ -141,16 +141,16 @@ const HomePage = ({ onNavigateToAbout }) => {
         "Published in Physical Review Applied.",
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function)."
       ],
-      image: "/api/placeholder/200/150"
+      image: "https://placehold.co/200x150"
     }
   ];
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
       <div className="mb-12">
-        <img 
-          src="/api/placeholder/150/150" 
-          alt="Profile" 
+        <img
+          src="https://placehold.co/150x150"
+          alt="Profile"
           className="w-32 h-32 rounded-lg mb-6"
         />
         <h1 className="text-4xl font-bold mb-2">Richard Ren</h1>
@@ -163,14 +163,14 @@ const HomePage = ({ onNavigateToAbout }) => {
         <p className="text-lg text-gray-700 mb-6">
           My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently conducted the largest empirical meta-analysis of AI safety benchmarks to date.
         </p>
-        
-        <button 
+
+        <button
           onClick={onNavigateToAbout}
           className="text-blue-600 hover:text-blue-800 hover:underline mb-6 flex items-center"
         >
           More About Me <ChevronDown className="w-4 h-4 ml-1" />
         </button>
-        
+
         <div className="flex space-x-4 mb-8">
           <a href="https://scholar.google.com/citations?user=o-Vl80UAAAAJ&hl=en" className="text-gray-600 hover:text-gray-900">
             <BookOpen className="w-6 h-6" />
