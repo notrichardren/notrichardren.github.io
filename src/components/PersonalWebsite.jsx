@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen } from 'lucide-react';
 
+// Import the images
+import sillyGoose from '../assets/silly-goose.jpg';
+import gooseIpad from '../assets/goose-ipad.gif';
+import gooseHonking from '../assets/goose-honking-goose.gif';
+import safetywashing from '../assets/safetywashing.png';
+import repe from '../assets/repe.png';
+import lll from '../assets/lll.png';
+import scatteringprobe from '../assets/scatteringprobe.png';
+import validml from '../assets/validml.png';
+
 const AboutPage = ({ onBack }) => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
@@ -13,9 +23,9 @@ const AboutPage = ({ onBack }) => {
       </button>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Research Philosophy</h2>
+        <h2 className="text-2xl font-bold mb-6">Research Style</h2>
         <p className="text-gray-700 mb-6">
-          My research style is rapid, iterative, and experimentally-focused. In my research, I like to continually re-prioritize, remodel my worldview based on the empirical evidence, and minimize entropy quickly. I've also found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
+          I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview based on the experimental evidence, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
         <p className="text-gray-700 mb-6">
           I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and potential new areas that the ML community at large is not focused on but could be <a href="https://www.youtube.com/watch?v=vtIzMaLkCaM" className="text-blue-600 hover:underline">valuable</a>.
@@ -28,7 +38,7 @@ const AboutPage = ({ onBack }) => {
           My inspiration and interest in AI safety research stems from reading <em>Human Compatible</em> and <em>Code</em> during my sophomore year of undergrad. I want to understand the implicit values encoded into AI systems. How we build AI systems may be the new law.
         </p>
         <p className="text-gray-700">
-          I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News. I would like this title to take off.
+          I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News.
         </p>
       </section>
     </div>
@@ -46,7 +56,7 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
         <img
           src={image}
           alt={title}
-          className="w-48 h-36 object-cover rounded flex-shrink-0"
+          className="w-48 h-36 object-cover rounded flex-shrink-0 bg-white"
         />
         <div className="flex-grow">
           <h3 className="text-xl font-semibold mb-3">{title}</h3>
@@ -84,6 +94,9 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
 };
 
 const HomePage = ({ onNavigateToAbout }) => {
+  const profileImages = [sillyGoose, gooseIpad];
+  const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+
   const researchProjects = [
     {
       title: "Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress? (2024)",
@@ -91,32 +104,32 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "NeurIPS 2024 Datasets & Benchmarks Track",
       link: "http://www.arxiv.org/abs/2407.21792",
       details: [
-        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date.",
+        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, measuring the correlations of safety benchmark scores with compute and capabilities benchmarks across models.",
         "I was invited to present this work at the UK Government AI Safety Institute.",
       ],
-      image: "https://placehold.co/200x150"
+      image: safetywashing
     },
     {
       title: "Representation Engineering: A Top-Down Approach to AI Transparency (2023)",
       authors: ["Andy Zou", "Long Phan*", "Sarah Chen*", "James Campbell*", "Phillip Guo*", "Richard Ren*", "Alexander Pan", "Xuwang Yin", "Mantas Mazeika", "Ann-Kathrin Dombrowski", "Shashwat Goel", "Nathaniel Li", "Michael J. Byun", "Zifan Wang", "Alex Mallen", "Steven Basart", "Sanmi Koyejo", "Dawn Song", "Matt Fredrikson", "J. Zico Kolter", "Dan Hendrycks"],
-      publication: "arXiv preprint arXiv:2310.01405",
+      publication: "arXiv preprint",
       link: "http://www.arxiv.org/abs/2310.01405",
       details: [
         "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. (in intermediate model layers) which could be used to steer the model's behavior as desired.",
         "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
         "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM."
       ],
-      image: "https://placehold.co/200x150"
+      image: repe
     },
     {
-      title: "Localizing Lying in LLaMA: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
+      title: "Localizing Lying in Llama: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
       authors: ["James Campbell*", "Richard Ren*", "Phillip Guo*"],
       publication: "NeurIPS 2023 SoLaR Workshop",
       link: "http://www.arxiv.org/abs/2311.15131",
       details: [
-        "By engineering prompts to induce dishonest behavior, training a linear probe on intermediate model activations, and patching activations, we mechanistically investigate lying in a controlled setting.",
+        "We mechanistically investigate lying in a controlled setting by (a) engineering prompts to induce dishonest behavior, (b) training a linear probe on intermediate model activations, and (c) causally patching activations.",
       ],
-      image: "https://placehold.co/200x150"
+      image: lll
     },
     {
       title: "High-Efficiency Scattering Probe Design for S-Polarized Near-Field Microscopy (2021)",
@@ -124,9 +137,10 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "Applied Physics Express",
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
-        "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude."
+        "Used computational physics simulations to design a new probe for s-polarized near-field microscopy that improved signal-to-noise ratio by two orders of magnitude.",
+        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="/assets/APEX.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
       ],
-      image: "https://placehold.co/200x150"
+      image: scatteringprobe
     },
     {
       title: "Validity of Machine Learning in the Quantitative Analysis of Complex Scanning Near-Field Optical Microscopy Signals Using Simulated Data (2021)",
@@ -134,9 +148,10 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "Physical Review Applied",
       link: "https://iopscience.iop.org/article/10.35848/1882-0786/abd716/meta",
       details: [
-        "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function)."
+        "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function) on simulated data.",
+        < span key="pdf" > The article is published by a non-open- access journal, which there's unfortunately absolutely <a href="/assets/PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get past.</span>
       ],
-      image: "https://placehold.co/200x150"
+      image: validml
     }
   ];
 
@@ -144,7 +159,7 @@ const HomePage = ({ onNavigateToAbout }) => {
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
       <div className="mb-12">
         <img
-          src="https://placehold.co/150x150"
+          src={randomImage}
           alt="Profile"
           className="w-32 h-32 rounded-lg mb-6"
         />
@@ -153,10 +168,10 @@ const HomePage = ({ onNavigateToAbout }) => {
           {["a professional silly goose", "a high entropy researcher"][Math.floor(Math.random() * 2)]}
         </p>
         <p className="text-lg text-gray-700 mb-4">
-          I'm a fourth-year undergraduate student at the Jerome Fisher M&T Program at the University of Pennsylvania. My research is the science of AI evaluations as well as steering model behaviors.
+          I'm a fourth-year undergraduate student at the Jerome Fisher M&T Program at the University of Pennsylvania. My research is on the science of AI evaluations as well as steering model behaviors.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently conducted the largest empirical meta-analysis of AI safety benchmarks to date.
+          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently co-authored the most comprehensive empirical meta-analysis of AI safety benchmarks to date.
         </p>
 
         <button
