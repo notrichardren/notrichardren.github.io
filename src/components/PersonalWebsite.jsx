@@ -23,22 +23,47 @@ const AboutPage = ({ onBack }) => {
       </button>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Research Style</h2>
+        <h2 className="text-2xl font-bold mb-6">Research style</h2>
         <p className="text-gray-700 mb-6">
           I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview based on the experimental evidence, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
-        <p className="text-gray-700 mb-6">
+        <p className="text-gray-700">
           I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and potential new areas that the ML community at large is not focused on but could be <a href="https://www.youtube.com/watch?v=vtIzMaLkCaM" className="text-blue-600 hover:underline">valuable</a>.
         </p>
       </section>
 
-      <section>
+      <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Why?</h2>
         <p className="text-gray-700 mb-6">
           My inspiration and interest in AI safety research stems from reading <em>Human Compatible</em> and <em>Code</em> during my sophomore year of undergrad. I want to understand the implicit values encoded into AI systems. How we build AI systems may be the new law.
         </p>
         <p className="text-gray-700">
           I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News.
+        </p>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">How do I get into research?</h2>
+        <p className="text-gray-700 mb-4">
+          This is some advice I typed up over DM for someone completely new at research.
+        </p>
+        <p className="text-gray-700 mb-4">
+          The way I "dive into a research area" — particularly one I'm not familiar with at all — is an iterative process of (a) paper reading, (b) idea generation, and (c) conversation.
+        </p>
+        <p className="text-gray-700 mb-4">
+          This means that I usually start by talking to people who work in the space I want, and getting some papers — and then picking one and diving in detail. Afterwards, I type up notes and questions, and iteratively keep on picking papers and writing notes and having conversations.
+        </p>
+        <p className="text-gray-700 mb-4">
+          This iteration looks like: doing readings for lots of papers, writing annotations that serve as both useful for the people I talk to as well as artifacts of the effort I put in (that I can reference in applications or conversations), and then talking to mentors who can recommend next steps and who I can discuss the paper with. Notes on new papers can be especially useful to mentors too.
+        </p>
+        <p className="text-gray-700 mb-4">
+          Eventually, I'll have enough knowledge to type up research ideas and present them to people. They might give feedback around how it's not novel, or how it is, or how it's interesting, or critique the setup – but it'll usually be really useful.
+        </p>
+        <p className="text-gray-700 mb-4">
+          Then, I usually pick a research topic and find collaborators and go for it. Generally, I value informally figuring out your own research you want to do, and then diving into that space and talking to people there to build expertise. Pursue <em>those</em> research ideas – ones that you created, or ones that you think you vibe with, or offhand remarks from a professor or someone you talked to that you think could pose an interesting research question.
+        </p>
+        <p className="text-gray-700">
+          In general, I'm a big fan of informal interactions for research, research mentorship, and research collaboration — above getting a posted RA position for a PhD student — but your mileage can vary. Other people have done the RA route and turned out great. You're much better off taking an approach of "I'm reading this paper, let me email them" over official posted positions. Make sure you're ambitious and focused on research that you truly believe in.
         </p>
       </section>
     </div>
@@ -116,7 +141,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       publication: "arXiv preprint",
       link: "http://www.arxiv.org/abs/2310.01405",
       details: [
-        "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. (in intermediate model layers) which could be used to steer the model's behavior as desired.",
+        "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. in intermediate model layers, which could be used to steer the model's behavior as desired.",
         "Cited by OpenAI's Superalignment Fast Grants page, and has over 200 citations generally.",
         "Techniques from the paper (e.g. RepControl) have been incorporated into llama.cpp and vLLM.",
         <span key="links">Links: <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
@@ -216,7 +241,7 @@ const HomePage = ({ onNavigateToAbout }) => {
             },
             {
               date: 'April 4, 2024',
-              content: <>Technique introduced in research paper, control vectors, added to vLLM (<em>Representation Engineering</em>).</>
+              content: <>Control vectors added to vLLM (<em>Representation Engineering</em>).</>
             },
             {
               date: 'March 16, 2024',
