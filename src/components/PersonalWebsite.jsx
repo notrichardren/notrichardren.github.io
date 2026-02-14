@@ -12,7 +12,6 @@ import sillyGoose from '../assets/silly-goose.jpg';
 import gooseIpad from '../assets/goose-ipad.gif';
 import gooseHonking from '../assets/goose-honking-goose.gif';
 import upennLogo from '../assets/upenn-logo.png';
-import cocaColaLogo from '../assets/coca-cola-logo.png';
 import safetywashing from '../assets/safetywashing.png';
 import repe from '../assets/repe.png';
 import lll from '../assets/lll.png';
@@ -380,10 +379,6 @@ const HomePage = ({ onNavigateToAbout }) => {
               <p className="text-gray-700 font-medium">University of Pennsylvania</p>
               <p className="text-gray-500">Computer Science (Penn Engineering) and Economics (Wharton School of Business)</p>
             </div>
-          </div>
-          <div className="flex items-center space-x-4 ml-14">
-            <img src={cocaColaLogo} alt="Coca-Cola" className="w-8 h-8 object-contain" />
-            <p className="text-gray-500">Sponsored by <a href="https://www.coca-colascholarsfoundation.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Coca-Cola</a></p>
           </div>
         </div>
       </section>
