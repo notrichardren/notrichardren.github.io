@@ -143,10 +143,20 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
 };
 
 const HomePage = ({ onNavigateToAbout }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const profileImages = [sillyGoose, gooseIpad];
-  const [frontImage] = useState(() => profileImages[Math.floor(Math.random() * profileImages.length)]);
-  const backImage = gooseHonking;
+  const allGooseImages = [sillyGoose, gooseIpad, gooseHonking];
+  const [gooseIndex, setGooseIndex] = useState(0);
+  const [spinning, setSpinning] = useState(false);
+
+  const handleGooseClick = () => {
+    if (spinning) return;
+    setSpinning(true);
+    setTimeout(() => {
+      setGooseIndex((prev) => (prev + 1) % allGooseImages.length);
+    }, 300);
+    setTimeout(() => {
+      setSpinning(false);
+    }, 600);
+  };
 
   const researchProjects = [
     {
@@ -258,14 +268,9 @@ const HomePage = ({ onNavigateToAbout }) => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
       <div className="mb-12">
-        <div className="flip-card mb-6" onClick={() => setIsFlipped(!isFlipped)}>
-          <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
-            <div className="flip-card-front">
-              <img src={frontImage} alt="Profile" />
-            </div>
-            <div className="flip-card-back">
-              <img src={backImage} alt="Profile" />
-            </div>
+        <div className="flip-card mb-6" onClick={handleGooseClick}>
+          <div className={`flip-card-inner ${spinning ? 'spinning' : ''}`}>
+            <img src={allGooseImages[gooseIndex]} alt="Profile" className="w-full h-full object-cover rounded-lg" />
           </div>
         </div>
         <h1 className="text-4xl font-bold mb-2">Richard Ren</h1>
