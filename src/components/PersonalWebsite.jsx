@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ChevronRight, ArrowLeft, BookOpen } from 'lucide-react';
 
 const SubstackIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -22,11 +23,12 @@ import utilityEngImg from '../assets/utility-engineering.png';
 import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
 
-const AboutPage = ({ onBack }) => {
+const AboutPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
       <button
-        onClick={onBack}
+        onClick={() => navigate('/')}
         className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -141,7 +143,8 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
   );
 };
 
-const HomePage = ({ onNavigateToAbout }) => {
+const HomePage = () => {
+  const navigate = useNavigate();
   const allGooseImages = [sillyGoose, gooseIpad, gooseHonking];
   const [gooseIndex, setGooseIndex] = useState(0);
   const [spinning, setSpinning] = useState(false);
@@ -193,7 +196,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       image: utilityEngImg
     },
     {
-      title: "Humanity's Last Exam (2025)",
+      title: "A Benchmark of Expert-Level Academic Questions to Assess AI Capabilities (2025)",
       authors: ["Long Phan", "Alice Gatti", "Ziwen Han", "Nathaniel Li", "Josephina Hu", "...", "Richard Ren", "... (1000+ authors)"],
       publication: "Nature",
       link: "https://www.nature.com/articles/s41586-025-09962-4",
@@ -280,10 +283,10 @@ const HomePage = ({ onNavigateToAbout }) => {
           My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, featured in the New York Times and TechCrunch, published in Nature, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
         </p>
         <button
-          onClick={onNavigateToAbout}
+          onClick={() => navigate('/about')}
           className="text-blue-600 hover:text-blue-800 hover:underline mb-6 flex items-center"
         >
-          More About Me <ChevronDown className="w-4 h-4 ml-1" />
+          More About Me <ChevronRight className="w-4 h-4 ml-1" />
         </button>
 
         <div className="flex space-x-4 mb-8">
@@ -386,18 +389,4 @@ const HomePage = ({ onNavigateToAbout }) => {
   );
 };
 
-const PersonalWebsite = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-
-  return (
-    <div>
-      {currentPage === 'home' ? (
-        <HomePage onNavigateToAbout={() => setCurrentPage('about')} />
-      ) : (
-        <AboutPage onBack={() => setCurrentPage('home')} />
-      )}
-    </div>
-  );
-};
-
-export default PersonalWebsite;
+export { HomePage, AboutPage };
