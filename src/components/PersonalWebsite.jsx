@@ -289,7 +289,7 @@ const HomePage = () => {
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities, featured in the <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" className="text-blue-600 hover:underline">New York Times</a> and TechCrunch, published in Nature, ICML Spotlight, and NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led the most comprehensive empirical meta-analysis of AI safety benchmarks to date as well as the development of an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
+          My past work has been presented at the UK AI Safety Institute, cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities, featured in the <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" className="text-blue-600 hover:underline">Washington Post</a>, and TechCrunch, published in Nature, ICML Spotlight, and NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led the most comprehensive empirical meta-analysis of AI safety benchmarks to date as well as the development of an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
         </p>
         <button
           onClick={() => navigate('/about')}
@@ -324,6 +324,10 @@ const HomePage = () => {
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">News</h2>
         <div className="news-scroll space-y-4 max-h-64 overflow-y-auto pr-2 pb-4">
           {[
+            {
+              date: 'January 2026',
+              content: <><em>Remote Labor Index</em> featured in the <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Washington Post</a>.</>
+            },
             {
               date: 'August 20, 2025',
               content: <><em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
