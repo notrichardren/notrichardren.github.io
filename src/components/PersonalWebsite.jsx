@@ -10,6 +10,7 @@ const SubstackIcon = ({ className }) => (
 // Import the images
 import sillyGoose from '../assets/silly-goose.jpg';
 import gooseIpad from '../assets/goose-ipad.gif';
+import gooseHonking from '../assets/goose-honking-goose.gif';
 import upennLogo from '../assets/upenn-logo.png';
 import cocaColaLogo from '../assets/coca-cola-logo.png';
 import safetywashing from '../assets/safetywashing.png';
@@ -142,8 +143,10 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
 };
 
 const HomePage = ({ onNavigateToAbout }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
   const profileImages = [sillyGoose, gooseIpad];
-  const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+  const [frontImage] = useState(() => profileImages[Math.floor(Math.random() * profileImages.length)]);
+  const backImage = gooseHonking;
 
   const researchProjects = [
     {
@@ -255,11 +258,16 @@ const HomePage = ({ onNavigateToAbout }) => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
       <div className="mb-12">
-        <img
-          src={randomImage}
-          alt="Profile"
-          className="w-32 h-32 rounded-lg mb-6"
-        />
+        <div className="flip-card mb-6" onClick={() => setIsFlipped(!isFlipped)}>
+          <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
+            <div className="flip-card-front">
+              <img src={frontImage} alt="Profile" />
+            </div>
+            <div className="flip-card-back">
+              <img src={backImage} alt="Profile" />
+            </div>
+          </div>
+        </div>
         <h1 className="text-4xl font-bold mb-2">Richard Ren</h1>
         <p className="text-lg text-gray-700 mb-4">
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
