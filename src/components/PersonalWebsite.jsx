@@ -196,7 +196,7 @@ const HomePage = () => {
       image: utilityEngImg
     },
     {
-      title: "A Benchmark of Expert-Level Academic Questions to Assess AI Capabilities (2025)",
+      title: "Humanity's Last Exam: A Benchmark of Expert-Level Academic Questions to Assess AI Capabilities (2025)",
       authors: ["Long Phan", "Alice Gatti", "Ziwen Han", "Nathaniel Li", "Josephina Hu", "...", "Richard Ren", "... (1000+ authors)"],
       publication: "Nature",
       link: "https://www.nature.com/articles/s41586-025-09962-4",
