@@ -26,3 +26,22 @@
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(360deg); }
 }
+
+.news-scroll {
+  position: relative;
+}
+
+.news-scroll::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(transparent, white);
+  pointer-events: none;
+}
+
+.news-scroll:has(:last-child:not(:nth-child(-n+4))) {
+  /* Only show fade when there are enough items to scroll */
+}
