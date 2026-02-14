@@ -273,7 +273,7 @@ const HomePage = ({ onNavigateToAbout }) => {
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, featured in the New York Times and TechCrunch, published in Nature, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark.
+          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, featured in the New York Times and TechCrunch, published in Nature, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
         </p>
         <button
           onClick={onNavigateToAbout}
