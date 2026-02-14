@@ -159,6 +159,17 @@ const HomePage = ({ onNavigateToAbout }) => {
 
   const researchProjects = [
     {
+      title: "Remote Labor Index: Measuring AI Automation of Remote Work (2025)",
+      authors: ["Mantas Mazeika", "Alice Gatti", "Cristina Menghini", "...", "Richard Ren", "...", "Dan Hendrycks", "(46 authors)"],
+      publication: "arXiv preprint",
+      link: "https://arxiv.org/abs/2510.26787",
+      details: [
+        "A broadly multi-sector benchmark comprising 240 real-world, economically valuable projects sourced from freelance platforms, designed to evaluate end-to-end agent performance. The highest-performing agent achieved an automation rate of 2.5%.",
+        <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: rliImg
+    },
+    {
       title: "The MASK Benchmark: Disentangling Honesty From Accuracy in AI Systems (2025)",
       authors: ["Richard Ren*", "Arunim Agarwal*", "Mantas Mazeika*", "Cristina Menghini*", "Robert Vacareanu", "Brad Kenstler", "Mick Yang", "Isabelle Barrass", "Alice Gatti", "Xuwang Yin", "Eduardo Trevino", "Matias Geralnik", "Adam Khoja", "Dean Lee", "Summer Yue", "Dan Hendrycks"],
       publication: "arXiv preprint",
@@ -168,6 +179,30 @@ const HomePage = ({ onNavigateToAbout }) => {
         <span key="links">Links: <a href="https://www.mask-benchmark.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/mask" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
       ],
       image: maskImg
+    },
+    {
+      title: "Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs (2025)",
+      authors: ["Mantas Mazeika", "Xuwang Yin", "Rishub Tamirisa", "Jaehyuk Lim", "Bruce W. Lee", "Richard Ren", "Long Phan", "Norman Mu", "Adam Khoja", "Oliver Zhang", "Dan Hendrycks"],
+      publication: "ICML 2025 Spotlight",
+      link: "https://arxiv.org/abs/2502.08640",
+      details: [
+        "Contributing researcher & engineer.",
+        "Examines how goals and values emerge in large language models through utility function frameworks. Independently-sampled preferences in current LLMs exhibit high degrees of structural coherence that intensifies with scale.",
+        <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: utilityEngImg
+    },
+    {
+      title: "Humanity's Last Exam (2025)",
+      authors: ["Long Phan", "Alice Gatti", "Ziwen Han", "Nathaniel Li", "Josephina Hu", "...", "Richard Ren", "... (1000+ authors)"],
+      publication: "Nature",
+      link: "https://www.nature.com/articles/s41586-025-09962-4",
+      details: [
+        "QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. I am on the organizing team.",
+        "2,500 questions across dozens of subjects with both multiple-choice and short-answer formats. Current state-of-the-art LLMs perform poorly, revealing substantial capability gaps compared to expert-level knowledge.",
+        <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: hleImg
     },
     {
       title: "Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress? (2024)",
@@ -182,39 +217,15 @@ const HomePage = ({ onNavigateToAbout }) => {
       image: safetywashing
     },
     {
-      title: "Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs (2025)",
-      authors: ["Mantas Mazeika", "Xuwang Yin", "Rishub Tamirisa", "Jaehyuk Lim", "Bruce W. Lee", "Richard Ren", "Long Phan", "Norman Mu", "Adam Khoja", "Oliver Zhang", "Dan Hendrycks"],
-      publication: "arXiv preprint",
-      link: "https://arxiv.org/abs/2502.08640",
+      title: "Localizing Lying in Llama: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
+      authors: ["James Campbell*", "Richard Ren*", "Phillip Guo*"],
+      publication: "NeurIPS 2023 SoLaR Workshop",
+      link: "https://arxiv.org/abs/2311.15131",
       details: [
-        "Contributing researcher & engineer.",
-        "Examines how goals and values emerge in large language models through utility function frameworks. Independently-sampled preferences in current LLMs exhibit high degrees of structural coherence that intensifies with scale.",
-        <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+        "We mechanistically investigate instructed dishonesty in a controlled setting by (a) training and transferring linear probes on intermediate model activations and (b) activation patching.",
+        <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
       ],
-      image: utilityEngImg
-    },
-    {
-      title: "Humanity's Last Exam (2025)",
-      authors: ["Long Phan", "Alice Gatti", "Ziwen Han", "Nathaniel Li", "Josephina Hu", "...", "Richard Ren", "... (1000+ authors)"],
-      publication: "arXiv preprint / Nature",
-      link: "https://arxiv.org/abs/2501.14249",
-      details: [
-        "QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. I am on the organizing team.",
-        "2,500 questions across dozens of subjects with both multiple-choice and short-answer formats. Current state-of-the-art LLMs perform poorly, revealing substantial capability gaps compared to expert-level knowledge.",
-        <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
-      ],
-      image: hleImg
-    },
-    {
-      title: "Remote Labor Index: Measuring AI Automation of Remote Work (2025)",
-      authors: ["Mantas Mazeika", "Alice Gatti", "Cristina Menghini", "...", "Richard Ren", "...", "Dan Hendrycks", "(46 authors)"],
-      publication: "arXiv preprint",
-      link: "https://arxiv.org/abs/2510.26787",
-      details: [
-        "A broadly multi-sector benchmark comprising 240 real-world, economically valuable projects sourced from freelance platforms, designed to evaluate end-to-end agent performance. The highest-performing agent achieved an automation rate of 2.5%.",
-        <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
-      ],
-      image: rliImg
+      image: lll
     },
     {
       title: "Representation Engineering: A Top-Down Approach to AI Transparency (2023)",
@@ -228,17 +239,6 @@ const HomePage = ({ onNavigateToAbout }) => {
         <span key="links">Links: <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
       ],
       image: repe
-    },
-    {
-      title: "Localizing Lying in Llama: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
-      authors: ["James Campbell*", "Richard Ren*", "Phillip Guo*"],
-      publication: "NeurIPS 2023 SoLaR Workshop",
-      link: "https://arxiv.org/abs/2311.15131",
-      details: [
-        "We mechanistically investigate instructed dishonesty in a controlled setting by (a) training and transferring linear probes on intermediate model activations and (b) activation patching.",
-        <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
-      ],
-      image: lll
     },
     {
       title: "High-Efficiency Scattering Probe Design for S-Polarized Near-Field Microscopy (2021)",
