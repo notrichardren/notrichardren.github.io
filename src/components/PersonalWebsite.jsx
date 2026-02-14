@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen, FileText } from 'lucide-react';
 
 // Import the images
 import sillyGoose from '../assets/silly-goose.jpg';
 import gooseIpad from '../assets/goose-ipad.gif';
-import gooseHonking from '../assets/goose-honking-goose.gif';
+import upennLogo from '../assets/upenn-logo.png';
+import cocaColaLogo from '../assets/coca-cola-logo.png';
 import safetywashing from '../assets/safetywashing.png';
 import repe from '../assets/repe.png';
 import lll from '../assets/lll.png';
 import scatteringprobe from '../assets/scatteringprobe.png';
 import validml from '../assets/validml.png';
+import maskImg from '../assets/mask.png';
+import utilityEngImg from '../assets/utility-engineering.png';
+import hleImg from '../assets/hle.png';
+import rliImg from '../assets/rli.png';
 
 const AboutPage = ({ onBack }) => {
   return (
@@ -25,7 +30,7 @@ const AboutPage = ({ onBack }) => {
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Research style</h2>
         <p className="text-gray-700 mb-6">
-          I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview based on the experimental evidence, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
+          I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
         <p className="text-gray-700">
           I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and new potential research areas that the ML community is not focused on.
@@ -72,6 +77,13 @@ const AboutPage = ({ onBack }) => {
           I also really like this <a href="https://www.youtube.com/watch?v=vtIzMaLkCaM" className="text-blue-600 hover:underline">lecture</a> on how to present and write research.
         </p>
       </section>
+
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Quotes</h2>
+        <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-700">
+          "Forget the yen. Bet on the Ren." — Chenrui Zhang
+        </blockquote>
+      </section>
     </div>
   );
 };
@@ -80,17 +92,16 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="border border-gray-200 rounded-lg p-4 mb-6 shadow-sm">
-      <a
-        href={link}
-        className="flex space-x-6"
-      >
-        <img
-          src={image}
-          alt={title}
-          className="w-48 h-36 object-cover rounded flex-shrink-0 bg-white"
-        />
+      <div className="flex space-x-6 cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
+        <a href={link} onClick={(e) => e.stopPropagation()} className="flex-shrink-0">
+          <img
+            src={image}
+            alt={title}
+            className="w-48 h-36 object-cover rounded bg-white"
+          />
+        </a>
         <div className="flex-grow">
-          <h3 className="text-xl font-semibold mb-3">{title}</h3>
+          <a href={link} onClick={(e) => e.stopPropagation()} className="text-xl font-semibold mb-3 text-blue-600 hover:underline block">{title}</a>
           <p className="text-gray-700 mb-2">
             {authors.map((author, i) => (
               <span key={i}>
@@ -103,16 +114,9 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
               </span>
             ))}
           </p>
-          <p className="text-blue-600">{publication}</p>
+          <p className="text-gray-500">{publication}</p>
         </div>
-      </a>
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center text-blue-600 hover:text-blue-800 mt-2 w-full"
-      >
-        <span className="flex-grow text-left">Details</span>
-        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-      </button>
+      </div>
       {isExpanded && (
         <ul className="mt-4 ml-4 list-disc space-y-2 text-gray-700">
           {details.map((detail, index) => (
@@ -130,22 +134,68 @@ const HomePage = ({ onNavigateToAbout }) => {
 
   const researchProjects = [
     {
+      title: "The MASK Benchmark: Disentangling Honesty From Accuracy in AI Systems (2025)",
+      authors: ["Richard Ren*", "Arunim Agarwal*", "Mantas Mazeika*", "Cristina Menghini*", "Robert Vacareanu", "Brad Kenstler", "Mick Yang", "Isabelle Barrass", "Alice Gatti", "Xuwang Yin", "Eduardo Trevino", "Matias Geralnik", "Adam Khoja", "Dean Lee", "Summer Yue", "Dan Hendrycks"],
+      publication: "arXiv preprint",
+      link: "https://arxiv.org/abs/2503.03750",
+      details: [
+        "A human-collected dataset evaluating whether language models lie versus simply being inaccurate. Larger models achieve higher accuracy but do not become more honest. Most frontier LLMs exhibit a substantial propensity to lie under pressure, resulting in low honesty scores.",
+        <span key="links">Links: <a href="https://www.mask-benchmark.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/mask" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
+      ],
+      image: maskImg
+    },
+    {
       title: "Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress? (2024)",
       authors: ["Richard Ren*", "Steven Basart*", "Adam Khoja", "Alice Gatti", "Long Phan", "Xuwang Yin", "Mantas Mazeika", "Alexander Pan", "Gabriel Mukobi", "Ryan H. Kim", "Stephen Fitz", "Dan Hendrycks"],
       publication: "NeurIPS 2024 Datasets & Benchmarks Track",
-      link: "http://www.arxiv.org/abs/2407.21792",
+      link: "https://arxiv.org/abs/2407.21792",
       details: [
-        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, covering eight topic areas (alignment, machine ethics, bias, misconceptions, calibration, scalable oversight, adversarial robustness, and weaponization capabilities). Measures the correlations of safety benchmark scores with pretraining compute and capabilities benchmarks across models. ",
+        "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, covering eight topic areas (alignment, machine ethics, bias, misconceptions, calibration, scalable oversight, adversarial robustness, and weaponization capabilities). Measures the correlations of safety benchmark scores with pretraining compute and capabilities benchmarks across models.",
         <span key="invited">I was <a href="https://x.com/tomekkorbak/status/1828154620138660352" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">invited</a> to present this work at the UK Government AI Safety Institute.</span>,
         <span key="links">Links: <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
       ],
       image: safetywashing
     },
     {
+      title: "Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs (2025)",
+      authors: ["Mantas Mazeika", "Xuwang Yin", "Rishub Tamirisa", "Jaehyuk Lim", "Bruce W. Lee", "Richard Ren", "Long Phan", "Norman Mu", "Adam Khoja", "Oliver Zhang", "Dan Hendrycks"],
+      publication: "arXiv preprint",
+      link: "https://arxiv.org/abs/2502.08640",
+      details: [
+        "Contributing researcher & engineer.",
+        "Examines how goals and values emerge in large language models through utility function frameworks. Independently-sampled preferences in current LLMs exhibit high degrees of structural coherence that intensifies with scale.",
+        <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: utilityEngImg
+    },
+    {
+      title: "Humanity's Last Exam (2025)",
+      authors: ["Long Phan", "Alice Gatti", "Ziwen Han", "Nathaniel Li", "Josephina Hu", "...", "Richard Ren", "... (1000+ authors)"],
+      publication: "arXiv preprint / Nature",
+      link: "https://arxiv.org/abs/2501.14249",
+      details: [
+        "QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. I am on the organizing team.",
+        "2,500 questions across dozens of subjects with both multiple-choice and short-answer formats. Current state-of-the-art LLMs perform poorly, revealing substantial capability gaps compared to expert-level knowledge.",
+        <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: hleImg
+    },
+    {
+      title: "Remote Labor Index: Measuring AI Automation of Remote Work (2025)",
+      authors: ["Mantas Mazeika", "Alice Gatti", "Cristina Menghini", "...", "Richard Ren", "...", "Dan Hendrycks", "(46 authors)"],
+      publication: "arXiv preprint",
+      link: "https://arxiv.org/abs/2510.26787",
+      details: [
+        "A broadly multi-sector benchmark comprising 240 real-world, economically valuable projects sourced from freelance platforms, designed to evaluate end-to-end agent performance. The highest-performing agent achieved an automation rate of 2.5%.",
+        <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+      ],
+      image: rliImg
+    },
+    {
       title: "Representation Engineering: A Top-Down Approach to AI Transparency (2023)",
       authors: ["Andy Zou", "Long Phan*", "Sarah Chen*", "James Campbell*", "Phillip Guo*", "Richard Ren*", "Alexander Pan", "Xuwang Yin", "Mantas Mazeika", "Ann-Kathrin Dombrowski", "Shashwat Goel", "Nathaniel Li", "Michael J. Byun", "Zifan Wang", "Alex Mallen", "Steven Basart", "Sanmi Koyejo", "Dawn Song", "Matt Fredrikson", "J. Zico Kolter", "Dan Hendrycks"],
       publication: "arXiv preprint",
-      link: "http://www.arxiv.org/abs/2310.01405",
+      link: "https://arxiv.org/abs/2310.01405",
       details: [
         "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. in intermediate model layers, which could be used to steer the model's behavior as desired.",
         <span key="citation">Cited by OpenAI's Superalignment Team's <a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Fast Grants page</a>, and has over 200 citations generally.</span>,
@@ -158,9 +208,9 @@ const HomePage = ({ onNavigateToAbout }) => {
       title: "Localizing Lying in Llama: Understanding Instructed Dishonesty on True-False Questions Through Prompting, Probing, and Patching (2023)",
       authors: ["James Campbell*", "Richard Ren*", "Phillip Guo*"],
       publication: "NeurIPS 2023 SoLaR Workshop",
-      link: "http://www.arxiv.org/abs/2311.15131",
+      link: "https://arxiv.org/abs/2311.15131",
       details: [
-        "We mechanistically investigate lying in a controlled setting by (a) engineering prompts to induce dishonest behavior, (b) training and transferring linear probes on intermediate model activations, and (c) causally patching activations.",
+        "We mechanistically investigate instructed dishonesty in a controlled setting by (a) training and transferring linear probes on intermediate model activations and (b) activation patching.",
         <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
       ],
       image: lll
@@ -183,7 +233,7 @@ const HomePage = ({ onNavigateToAbout }) => {
       link: "https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.15.014001",
       details: [
         "Used neural networks and k-nearest-neighbors to fit a map from spectroscopy output (scattering signal) to a property of interest (sample dielectric function) on simulated data.",
-        < span key="pdf" > The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get around.</span>
+        <span key="pdf">The article is published by a non-open-access journal, which there's unfortunately absolutely <a href="./PhysRevApl.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">no way</a> to get around.</span>
       ],
       image: validml
     }
@@ -198,14 +248,11 @@ const HomePage = ({ onNavigateToAbout }) => {
           className="w-32 h-32 rounded-lg mb-6"
         />
         <h1 className="text-4xl font-bold mb-2">Richard Ren</h1>
-        <p className="text-gray-600 italic mb-4">
-          {["a professional silly goose", "a high entropy researcher"][Math.floor(Math.random() * 2)]}
-        </p>
         <p className="text-lg text-gray-700 mb-4">
-          I'm a fourth-year undergraduate student at the Jerome Fisher M&T Program at the University of Pennsylvania. My research is on the science of AI evaluations as well as steering model behaviors.
+          I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Superalignment Fast Grants page, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have recently co-authored the most comprehensive empirical meta-analysis of AI safety benchmarks to date.
+          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have worked on a meta-analysis of AI safety benchmarks and an AI honesty benchmark.
         </p>
         <button
           onClick={onNavigateToAbout}
@@ -230,6 +277,9 @@ const HomePage = ({ onNavigateToAbout }) => {
           <a href="https://x.com/notRichardRen" className="text-gray-600 hover:text-gray-900">
             <Twitter className="w-6 h-6" />
           </a>
+          <a href="https://richardren.substack.com/" className="text-gray-600 hover:text-gray-900">
+            <FileText className="w-6 h-6" />
+          </a>
         </div>
       </div>
 
@@ -237,6 +287,26 @@ const HomePage = ({ onNavigateToAbout }) => {
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">News</h2>
         <div className="space-y-4">
           {[
+            {
+              date: 'August 20, 2025',
+              content: <><em>Safetywashing</em> and <em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
+            },
+            {
+              date: 'May 8, 2025',
+              content: <><em>Safetywashing</em> and <em>MASK Benchmark</em> cited by the <a href="https://arxiv.org/pdf/2506.20702" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities.</>
+            },
+            {
+              date: 'January 22, 2025',
+              content: <><em>Humanity's Last Exam</em> released: QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. Coverage from <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, etc.</>
+            },
+            {
+              date: 'January 22, 2025',
+              content: <><em>Safetywashing</em> cited three times in OpenAI's <a href="https://cdn.openai.com/papers/trading-inference-time-compute-for-adversarial-robustness-20250121_1.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">inference-time compute and adversarial robustness paper</a>.</>
+            },
+            {
+              date: 'January 15, 2025',
+              content: <><em>Safetywashing</em> cited as "research paper of the week" in TechCrunch.</>
+            },
             {
               date: 'September 26, 2024',
               content: <>Publication accepted to NeurIPS '24 D&B (<em>Safetywashing</em>).</>
@@ -253,25 +323,44 @@ const HomePage = ({ onNavigateToAbout }) => {
               date: 'March 16, 2024',
               content: <>Technique introduced in research paper, control vectors, added to llama.cpp (<em>Representation Engineering</em>).</>
             },
-            // {
-            //   date: 'December 14, 2023',
-            //   content: <>Paper cited by OpenAI's Superalignment Team under their Fast Grants Page (<em>Representation Engineering</em>).</>
-            // }
+            {
+              date: 'December 14, 2023',
+              content: <>Paper cited by OpenAI's Superalignment Team under their <a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Fast Grants page</a> as "work we would be excited to fund" (<em>Representation Engineering</em>).</>
+            }
           ].map((item, index) => (
             <div key={index} className="flex">
-              <span className="w-40 flex-shrink-0 font-medium">{item.date}</span>
+              <span className="w-48 flex-shrink-0 font-medium">{item.date}</span>
               <span className="text-gray-700">{item.content}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section>
+      <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">Research</h2>
         <div className="space-y-4">
           {researchProjects.map((project, index) => (
             <ResearchItem key={index} {...project} />
           ))}
+        </div>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 border-b pb-2">Education</h2>
+        <div className="space-y-4">
+          <div className="flex items-center space-x-4">
+            <img src={upennLogo} alt="University of Pennsylvania" className="w-10 h-10 object-contain" />
+            <div>
+              <p className="text-gray-700 font-medium">University of Pennsylvania</p>
+              <p className="text-gray-500">Computer Science (Penn Engineering) and Economics (Wharton School of Business)</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <img src={cocaColaLogo} alt="Coca-Cola" className="w-10 h-10 object-contain" />
+            <div>
+              <p className="text-gray-700">Sponsored by <a href="https://www.coca-colascholarsfoundation.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Coca-Cola</a></p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
