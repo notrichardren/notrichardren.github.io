@@ -167,8 +167,10 @@ const HomePage = () => {
       publication: "arXiv preprint",
       link: "https://arxiv.org/abs/2510.26787",
       details: [
+        "In collaboration with Scale AI.",
         "A broadly multi-sector benchmark comprising 240 real-world, economically valuable projects sourced from freelance platforms, designed to evaluate end-to-end agent performance. The highest-performing agent achieved an automation rate of 2.5%.",
-        <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+        <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://scale.com/research/rli" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Scale AI</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Remote+Labor+Index" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">4 citations</a></span>
       ],
       image: rliImg
     },
@@ -178,8 +180,10 @@ const HomePage = () => {
       publication: "arXiv preprint",
       link: "https://arxiv.org/abs/2503.03750",
       details: [
+        "In collaboration with Scale AI.",
         "A human-collected dataset evaluating whether language models lie versus simply being inaccurate. Larger models achieve higher accuracy but do not become more honest. Most frontier LLMs exhibit a substantial propensity to lie under pressure, resulting in low honesty scores.",
-        <span key="links">Links: <a href="https://www.mask-benchmark.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/mask" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
+        <span key="links">Links: <a href="https://www.mask-benchmark.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/mask" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://scale.com/research/mask" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Scale AI</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=MASK+Benchmark+Disentangling+Honesty" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">24 citations</a></span>
       ],
       image: maskImg
     },
@@ -191,7 +195,8 @@ const HomePage = () => {
       details: [
         "Contributing researcher & engineer.",
         "Examines how goals and values emerge in large language models through utility function frameworks. Independently-sampled preferences in current LLMs exhibit high degrees of structural coherence that intensifies with scale.",
-        <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+        <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Utility+Engineering+Analyzing+Controlling+Emergent+Value" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">36 citations</a></span>
       ],
       image: utilityEngImg
     },
@@ -201,9 +206,10 @@ const HomePage = () => {
       publication: "Nature",
       link: "https://www.nature.com/articles/s41586-025-09962-4",
       details: [
-        "QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. I am on the organizing team.",
+        "In collaboration with Scale AI. I am on the organizing team.",
         "2,500 questions across dozens of subjects with both multiple-choice and short-answer formats. Current state-of-the-art LLMs perform poorly, revealing substantial capability gaps compared to expert-level knowledge.",
-        <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>
+        <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://scale.com/research/humanitys-last-exam" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Scale AI</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Humanity%27s+Last+Exam" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">302 citations</a></span>
       ],
       image: hleImg
     },
@@ -215,7 +221,8 @@ const HomePage = () => {
       details: [
         "The most comprehensive empirical meta-analysis of AI safety benchmarks to date, covering eight topic areas (alignment, machine ethics, bias, misconceptions, calibration, scalable oversight, adversarial robustness, and weaponization capabilities). Measures the correlations of safety benchmark scores with pretraining compute and capabilities benchmarks across models.",
         <span key="invited">I was <a href="https://x.com/tomekkorbak/status/1828154620138660352" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">invited</a> to present this work at the UK Government AI Safety Institute.</span>,
-        <span key="links">Links: <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
+        <span key="links">Links: <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Safetywashing+AI+Safety+Benchmarks" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">49 citations</a></span>
       ],
       image: safetywashing
     },
@@ -226,7 +233,8 @@ const HomePage = () => {
       link: "https://arxiv.org/abs/2311.15131",
       details: [
         "We mechanistically investigate instructed dishonesty in a controlled setting by (a) training and transferring linear probes on intermediate model activations and (b) activation patching.",
-        <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>
+        <span key="links">Links: <a href="https://github.com/jam3scampbell/llama-lying" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/jam3scampbell/status/1729981499397603558?s=20" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Localizing+Lying+Llama" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">25 citations</a></span>
       ],
       image: lll
     },
@@ -239,7 +247,8 @@ const HomePage = () => {
         "We obtain control vectors for concepts such as honesty, morality, happiness, sadness, etc. in intermediate model layers, which could be used to steer the model's behavior as desired.",
         <span key="citation">Cited by OpenAI's Superalignment Team's <a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Fast Grants page</a>, and has over 200 citations generally.</span>,
         <span key="implementations">Techniques from the paper (e.g. RepControl) have been merged into <a href="https://github.com/ggerganov/llama.cpp/pull/5970" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">llama.cpp</a> and <a href="https://github.com/vllm-project/vllm/issues/3861" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">vLLM</a>.</span>,
-        <span key="links">Links: <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>
+        <span key="links">Links: <a href="https://www.ai-transparency.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/andyzoujm/representation-engineering" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a>.</span>,
+        <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Representation+Engineering+Top-Down+AI+Transparency" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">766 citations</a></span>
       ],
       image: repe
     },
@@ -280,7 +289,7 @@ const HomePage = () => {
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities, featured in the <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" className="text-blue-600 hover:underline">New York Times</a> and TechCrunch, published in Nature, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
+          My past work has been presented at the UK AI Safety Institute, cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities, featured in the <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" className="text-blue-600 hover:underline">New York Times</a> and TechCrunch, published in Nature, ICML Spotlight, and NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark. I make concrete predictions on AI timelines in <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">this post</a>.
         </p>
         <button
           onClick={() => navigate('/about')}
