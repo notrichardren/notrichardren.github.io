@@ -329,6 +329,10 @@ const HomePage = () => {
               content: <><em>Remote Labor Index</em> featured in the <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Washington Post</a>.</>
             },
             {
+              date: 'November 25, 2025',
+              content: <><em>MASK Benchmark</em> cited by <a href="https://alignment.anthropic.com/2025/honesty-elicitation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Anthropic Alignment</a>.</>
+            },
+            {
               date: 'August 20, 2025',
               content: <><em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
             },
