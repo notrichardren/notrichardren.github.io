@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen, FileText } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ArrowLeft, BookOpen } from 'lucide-react';
+
+const SubstackIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+  </svg>
+);
 
 // Import the images
 import sillyGoose from '../assets/silly-goose.jpg';
 import gooseIpad from '../assets/goose-ipad.gif';
 import upennLogo from '../assets/upenn-logo.png';
-import cocaColaLogo from '../assets/coca-cola-logo.png';
 import safetywashing from '../assets/safetywashing.png';
 import repe from '../assets/repe.png';
 import lll from '../assets/lll.png';
@@ -92,7 +97,7 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div className="border border-gray-200 rounded-lg p-4 mb-6 shadow-sm">
-      <div className="flex space-x-6 cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
+      <div className="flex space-x-6">
         <a href={link} onClick={(e) => e.stopPropagation()} className="flex-shrink-0">
           <img
             src={image}
@@ -117,6 +122,13 @@ const ResearchItem = ({ title, authors, link, details, image, publication }) => 
           <p className="text-gray-500">{publication}</p>
         </div>
       </div>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex items-center text-blue-600 hover:text-blue-800 mt-2 w-full"
+      >
+        <span className="flex-grow text-left">Details</span>
+        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+      </button>
       {isExpanded && (
         <ul className="mt-4 ml-4 list-disc space-y-2 text-gray-700">
           {details.map((detail, index) => (
@@ -252,7 +264,7 @@ const HomePage = ({ onNavigateToAbout }) => {
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
         <p className="text-lg text-gray-700 mb-6">
-          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have worked on a meta-analysis of AI safety benchmarks and an AI honesty benchmark.
+          My past work has been presented at the UK AI Safety Institute, cited by OpenAI's Safety Systems team, featured in the New York Times and TechCrunch, published in Nature, accepted at NeurIPS, and incorporated into llama.cpp and vLLM (two open-source model inference libraries). I have led a meta-analysis of AI safety benchmarks and an AI honesty benchmark.
         </p>
         <button
           onClick={onNavigateToAbout}
@@ -278,18 +290,18 @@ const HomePage = ({ onNavigateToAbout }) => {
             <Twitter className="w-6 h-6" />
           </a>
           <a href="https://richardren.substack.com/" className="text-gray-600 hover:text-gray-900">
-            <FileText className="w-6 h-6" />
+            <SubstackIcon className="w-6 h-6" />
           </a>
         </div>
       </div>
 
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">News</h2>
-        <div className="space-y-4">
+        <div className="space-y-4 max-h-64 overflow-y-auto pr-2">
           {[
             {
               date: 'August 20, 2025',
-              content: <><em>Safetywashing</em> and <em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
+              content: <><em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
             },
             {
               date: 'May 8, 2025',
@@ -301,7 +313,7 @@ const HomePage = ({ onNavigateToAbout }) => {
             },
             {
               date: 'January 22, 2025',
-              content: <><em>Safetywashing</em> cited three times in OpenAI's <a href="https://cdn.openai.com/papers/trading-inference-time-compute-for-adversarial-robustness-20250121_1.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">inference-time compute and adversarial robustness paper</a>.</>
+              content: <><em>Safetywashing</em> cited in OpenAI's <a href="https://cdn.openai.com/papers/trading-inference-time-compute-for-adversarial-robustness-20250121_1.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">inference-time compute and adversarial robustness paper</a>.</>
             },
             {
               date: 'January 15, 2025',
@@ -353,12 +365,6 @@ const HomePage = ({ onNavigateToAbout }) => {
             <div>
               <p className="text-gray-700 font-medium">University of Pennsylvania</p>
               <p className="text-gray-500">Computer Science (Penn Engineering) and Economics (Wharton School of Business)</p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <img src={cocaColaLogo} alt="Coca-Cola" className="w-10 h-10 object-contain" />
-            <div>
-              <p className="text-gray-700">Sponsored by <a href="https://www.coca-colascholarsfoundation.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Coca-Cola</a></p>
             </div>
           </div>
         </div>
