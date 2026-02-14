@@ -325,7 +325,7 @@ const HomePage = () => {
         <div className="news-scroll space-y-4 max-h-64 overflow-y-auto pr-2 pb-4">
           {[
             {
-              date: 'January 2026',
+              date: 'January 8, 2026',
               content: <><em>Remote Labor Index</em> featured in the <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Washington Post</a>.</>
             },
             {
