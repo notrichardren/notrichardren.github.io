@@ -319,7 +319,7 @@ const HomePage = () => {
 
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">News</h2>
-        <div className="news-scroll space-y-4 max-h-64 overflow-y-auto pr-2 pb-4">
+        <div className="news-scroll space-y-4 max-h-64 overflow-y-auto border border-gray-200 rounded-lg p-4">
           {[
             {
               date: 'January 8, 2026',
