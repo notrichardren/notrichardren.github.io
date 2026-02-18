@@ -331,7 +331,7 @@ const HomePage = () => {
             },
             {
               date: 'November 25, 2025',
-              content: <><em>MASK Benchmark</em> cited by <a href="https://alignment.anthropic.com/2025/honesty-elicitation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Anthropic Alignment</a>.</>
+              content: <><em>MASK Benchmark</em> cited by Anthropic Alignment Science Blog (<a href="https://alignment.anthropic.com/2025/honesty-elicitation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Evaluating honesty and lie detection techniques on a diverse suite of dishonest models</a>).</>
             },
             {
               date: 'August 20, 2025',
