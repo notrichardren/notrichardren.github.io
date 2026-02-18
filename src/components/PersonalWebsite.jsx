@@ -319,8 +319,12 @@ const HomePage = () => {
 
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6 border-b pb-2">News</h2>
-        <div className="news-scroll space-y-4 max-h-64 overflow-y-auto border border-gray-200 rounded-lg p-4">
+        <div className="news-scroll space-y-4 max-h-64 overflow-y-auto pr-2">
           {[
+            {
+              date: 'January 28, 2026',
+              content: <><em>Humanity's Last Exam</em> published in <a href="https://www.nature.com/articles/s41586-025-09962-4" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Nature</a>.</>
+            },
             {
               date: 'January 8, 2026',
               content: <><em>Remote Labor Index</em> featured in the <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Washington Post</a>.</>
@@ -339,7 +343,7 @@ const HomePage = () => {
             },
             {
               date: 'January 22, 2025',
-              content: <><em>Humanity's Last Exam</em> released: QA benchmark testing Ph.D.-level knowledge in-domain, in collaboration with Scale AI. Coverage from <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, etc.</>
+              content: <><em>Humanity's Last Exam</em> released. Coverage from <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, etc.</>
             },
             {
               date: 'January 22, 2025',
