@@ -342,8 +342,8 @@ const HomePage = () => {
               content: <><em>Safetywashing</em> and <em>MASK Benchmark</em> cited by the <a href="https://arxiv.org/pdf/2506.20702" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities.</>
             },
             {
-              date: 'January 22, 2025',
-              content: <><em>Humanity's Last Exam</em> released. Coverage from <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, etc.</>
+              date: 'January 23, 2025',
+              content: <><em>Humanity's Last Exam</em> released. Coverage from <a href="https://www.nytimes.com/2025/01/23/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, etc.</>
             },
             {
               date: 'January 22, 2025',
