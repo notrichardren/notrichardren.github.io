@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Body -->
+  <ellipse cx="32" cy="44" rx="18" ry="14" fill="#f5f5f0" stroke="#333" stroke-width="2"/>
+  <!-- Neck -->
+  <path d="M38 34 Q42 20 36 10" fill="none" stroke="#f5f5f0" stroke-width="10"/>
+  <path d="M38 34 Q42 20 36 10" fill="none" stroke="#333" stroke-width="2"/>
+  <!-- Head -->
+  <circle cx="34" cy="9" r="7" fill="#f5f5f0" stroke="#333" stroke-width="2"/>
+  <!-- Eye -->
+  <circle cx="31" cy="8" r="1.5" fill="#333"/>
+  <!-- Beak -->
+  <path d="M27 10 L20 12 L27 13 Z" fill="#e8a020" stroke="#333" stroke-width="1"/>
+  <!-- Wing -->
+  <path d="M22 38 Q28 32 38 36 Q30 40 22 38 Z" fill="#e8e8e0" stroke="#333" stroke-width="1.5"/>
+  <!-- Feet -->
+  <path d="M26 56 L22 62 M26 56 L26 62 M26 56 L30 62" fill="none" stroke="#e8a020" stroke-width="2" stroke-linecap="round"/>
+  <path d="M38 56 L34 62 M38 56 L38 62 M38 56 L42 62" fill="none" stroke="#e8a020" stroke-width="2" stroke-linecap="round"/>
+</svg>
