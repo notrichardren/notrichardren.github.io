@@ -204,7 +204,7 @@ const HomePage = () => {
       publication: "Nature",
       link: "https://www.nature.com/articles/s41586-025-09962-4",
       details: [
-        "On the organizing team for Humanity's Last Exam, a Ph.D.-level QA benchmark in collaboration with Scale AI. Published in Nature.",
+        "On the organizing team for Humanity's Last Exam, a professor/researcher/postdoc-level QA benchmark in collaboration with Scale AI. Published in Nature.",
         <span key="coverage">Covered by the <a href="https://www.nytimes.com/2025/01/22/technology/ai-test-humanitys-last-exam.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">New York Times</a>, <a href="https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-2024-11-27/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Reuters</a>, <a href="https://qz.com/humanitys-last-exam-ai-test-stumped-1851749313" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Quartz</a>, and others.</span>,
         <span key="links">Links: <a href="https://lastexam.ai" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://scale.com/research/humanitys-last-exam" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Scale AI</a>.</span>,
         <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Humanity%27s+Last+Exam" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">302 citations</a></span>
