@@ -23,133 +23,123 @@ import utilityEngImg from '../assets/utility-engineering.png';
 import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
 
-const GooseFollower = () => {
-  const containerRef = useRef(null);
-  const flipRef = useRef(null);
-  const waddleRef = useRef(null);
-  const posRef = useRef({ x: 0, y: 0 });
-  const targetRef = useRef({ x: 0, y: 0 });
-  const movingRef = useRef(false);
-  const initializedRef = useRef(false);
-  const [showHonk, setShowHonk] = useState(false);
-  const [visible, setVisible] = useState(false);
+const InteractiveScene = () => {
+  const sceneRef = useRef(null);
+  const glareRef = useRef(null);
 
   useEffect(() => {
+    const scene = sceneRef.current;
+    const glare = glareRef.current;
+    if (!scene) return;
+
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
-    const showTimer = setTimeout(() => setVisible(true), 500);
-
     const handleMouseMove = (e) => {
-      if (!initializedRef.current) {
-        posRef.current = { x: e.clientX, y: e.clientY + 80 };
-        initializedRef.current = true;
+      const rect = scene.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      scene.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg)`;
+
+      const layers = scene.querySelectorAll('.scene-layer');
+      layers.forEach((layer, i) => {
+        const depth = (i + 1) * 6;
+        layer.style.transform = `translateX(${x * depth}px) translateY(${y * depth}px)`;
+      });
+
+      if (glare) {
+        glare.style.background = `radial-gradient(circle at ${50 + x * 80}% ${50 + y * 80}%, rgba(255,255,255,0.18) 0%, transparent 60%)`;
       }
-      targetRef.current = { x: e.clientX, y: e.clientY };
     };
-    window.addEventListener('mousemove', handleMouseMove);
 
-    let animFrame;
-    const animate = () => {
-      const container = containerRef.current;
-      const flip = flipRef.current;
-      const waddle = waddleRef.current;
-      if (!container || !flip || !waddle || !initializedRef.current) {
-        animFrame = requestAnimationFrame(animate);
-        return;
-      }
-
-      const dx = targetRef.current.x - posRef.current.x;
-      const dy = targetRef.current.y - posRef.current.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist > 48) {
-        posRef.current.x += dx * 0.02;
-        posRef.current.y += dy * 0.02;
-        if (Math.abs(dx) > 2) {
-          flip.style.transform = dx > 0 ? 'scaleX(1)' : 'scaleX(-1)';
-        }
-        if (!movingRef.current) {
-          movingRef.current = true;
-          waddle.classList.add('goose-waddling');
-        }
-      } else {
-        if (movingRef.current) {
-          movingRef.current = false;
-          waddle.classList.remove('goose-waddling');
-        }
-      }
-
-      container.style.left = (posRef.current.x - 24) + 'px';
-      container.style.top = (posRef.current.y - 24) + 'px';
-
-      animFrame = requestAnimationFrame(animate);
+    const handleMouseLeave = () => {
+      scene.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg)';
+      const layers = scene.querySelectorAll('.scene-layer');
+      layers.forEach(layer => { layer.style.transform = 'translateX(0) translateY(0)'; });
+      if (glare) glare.style.background = 'transparent';
     };
-    animFrame = requestAnimationFrame(animate);
 
-    let active = true;
-    let honkTimer;
-    const scheduleHonk = () => {
-      honkTimer = setTimeout(() => {
-        if (!active) return;
-        if (!movingRef.current) {
-          setShowHonk(true);
-          setTimeout(() => { if (active) setShowHonk(false); }, 1500);
-        }
-        scheduleHonk();
-      }, 6000 + Math.random() * 8000);
-    };
-    scheduleHonk();
+    scene.addEventListener('mousemove', handleMouseMove);
+    scene.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      active = false;
-      clearTimeout(showTimer);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animFrame);
-      clearTimeout(honkTimer);
+      scene.removeEventListener('mousemove', handleMouseMove);
+      scene.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
-  if (!visible) return null;
-
   return (
-    <div ref={containerRef} className="fixed pointer-events-none" style={{ zIndex: 9999, left: -100, top: -100 }}>
-      <div ref={flipRef}>
-        <div ref={waddleRef} style={{ width: 48, height: 48 }}>
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <ellipse cx="22" cy="44" rx="10" ry="2.5" fill="rgba(0,0,0,0.06)"/>
-            <ellipse cx="20" cy="30" rx="13" ry="8.5" fill="#f5f2eb" stroke="#555" strokeWidth="1"/>
-            <path d="M7 27 L4 22 L9 26" fill="#e8e5dc" stroke="#555" strokeWidth="0.8"/>
-            <ellipse cx="18" cy="28" rx="7" ry="4" fill="#eae7e0" stroke="#555" strokeWidth="0.7"/>
-            <path d="M30 25 Q34 18 32 8" stroke="#555" strokeWidth="5" fill="none" strokeLinecap="round"/>
-            <path d="M30 25 Q34 18 32 8" stroke="#f5f2eb" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
-            <circle cx="32" cy="7" r="5" fill="#f5f2eb" stroke="#555" strokeWidth="1"/>
-            <circle cx="34.5" cy="6" r="1.2" fill="#222"/>
-            <circle cx="34.2" cy="5.6" r="0.35" fill="#fff"/>
-            <path d="M36.5 7.5 L42 8 L36.5 10" fill="#e8941a" stroke="#c47a10" strokeWidth="0.7" strokeLinejoin="round"/>
-            <line x1="16" y1="37" x2="15" y2="42" stroke="#e8941a" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="24" y1="37" x2="25" y2="42" stroke="#e8941a" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M12 42 L15 42 L18 42" stroke="#e8941a" strokeWidth="1.2" strokeLinecap="round"/>
-            <path d="M22 42 L25 42 L28 42" stroke="#e8941a" strokeWidth="1.2" strokeLinecap="round"/>
-          </svg>
-        </div>
+    <div
+      ref={sceneRef}
+      className="relative mx-auto rounded-2xl overflow-hidden cursor-default select-none"
+      style={{
+        width: '100%',
+        maxWidth: '480px',
+        height: '200px',
+        background: 'linear-gradient(170deg, #f0f4f8 0%, #e4ece6 50%, #d5e0cd 100%)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
+        transformStyle: 'preserve-3d',
+        transition: 'transform 0.15s ease-out',
+        border: '1px solid rgba(0,0,0,0.06)',
+      }}
+    >
+      {/* Layer 0: Books */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-3 left-6" width="100" height="90" viewBox="0 0 100 90" fill="none">
+          <rect x="5" y="12" width="13" height="55" rx="1.5" fill="#b5714d" stroke="#9a5f3e" strokeWidth="0.5" transform="rotate(-2, 11, 40)"/>
+          <rect x="20" y="5" width="11" height="62" rx="1.5" fill="#5b82a8" stroke="#4a6d8e" strokeWidth="0.5"/>
+          <rect x="33" y="18" width="15" height="49" rx="1.5" fill="#8b5e3c" stroke="#764f32" strokeWidth="0.5" transform="rotate(1, 40, 42)"/>
+          <rect x="50" y="8" width="12" height="59" rx="1.5" fill="#6b9070" stroke="#5a7a5e" strokeWidth="0.5"/>
+          <rect x="64" y="14" width="10" height="53" rx="1.5" fill="#9080a8" stroke="#7d6f95" strokeWidth="0.5" transform="rotate(-1, 69, 40)"/>
+          <rect x="76" y="20" width="14" height="47" rx="1.5" fill="#c4956e" stroke="#ab7f5c" strokeWidth="0.5" transform="rotate(2, 83, 44)"/>
+          {/* Shelf */}
+          <rect x="0" y="67" width="95" height="4" rx="1" fill="#c4a882" stroke="#b09570" strokeWidth="0.5"/>
+          <rect x="2" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
+          <rect x="89" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
+        </svg>
       </div>
-      {showHonk && (
-        <div className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap select-none"
-          style={{
-            background: 'white',
-            borderRadius: '12px',
-            padding: '2px 8px',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            fontFamily: 'serif',
-            color: '#444',
-            border: '1px solid #ddd',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          }}>
-          HONK!
-        </div>
-      )}
+
+      {/* Layer 1: Plant */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-2 right-6" width="70" height="100" viewBox="0 0 70 100" fill="none">
+          <path d="M22 62 L19 82 L51 82 L48 62 Z" fill="#c17f59" stroke="#a06840" strokeWidth="1"/>
+          <rect x="17" y="58" width="36" height="6" rx="2" fill="#d4916b" stroke="#b07850" strokeWidth="0.5"/>
+          <path d="M35 60 Q32 40 24 28" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q38 35 46 26" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q35 42 33 24" stroke="#4a7a3a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q30 45 20 38" stroke="#5a8a4a" strokeWidth="1.2" fill="none"/>
+          <path d="M35 60 Q42 42 50 36" stroke="#4a7a3a" strokeWidth="1.2" fill="none"/>
+          <ellipse cx="22" cy="27" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(-35, 22, 27)"/>
+          <ellipse cx="48" cy="25" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(30, 48, 25)"/>
+          <ellipse cx="32" cy="22" rx="8" ry="4" fill="#7aba6a" opacity="0.85" transform="rotate(-8, 32, 22)"/>
+          <ellipse cx="18" cy="37" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(-45, 18, 37)"/>
+          <ellipse cx="52" cy="35" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(40, 52, 35)"/>
+          <ellipse cx="35" cy="30" rx="6" ry="3" fill="#82c472" opacity="0.7" transform="rotate(5, 35, 30)"/>
+        </svg>
+      </div>
+
+      {/* Layer 2: Goose */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-1" style={{ left: '50%', marginLeft: '-32px' }} width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <ellipse cx="32" cy="58" rx="16" ry="3" fill="rgba(0,0,0,0.04)"/>
+          <ellipse cx="32" cy="50" rx="18" ry="11" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <rect x="28" y="24" width="8" height="20" rx="4" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <ellipse cx="32" cy="20" rx="10" ry="9" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <circle cx="27" cy="18" r="2" fill="#222"/>
+          <circle cx="37" cy="18" r="2" fill="#222"/>
+          <circle cx="26.4" cy="17.3" r="0.6" fill="#fff"/>
+          <circle cx="36.4" cy="17.3" r="0.6" fill="#fff"/>
+          <path d="M28 23 L32 27 L36 23 Z" fill="#e8941a" stroke="#c47a10" strokeWidth="1" strokeLinejoin="round"/>
+          <path d="M14 48 Q20 40 28 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
+          <path d="M50 48 Q44 40 36 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
+          <path d="M25 59 L22 63 M25 59 L25 63 M25 59 L28 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          <path d="M39 59 L36 63 M39 59 L39 63 M39 59 L42 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      {/* Glare overlay */}
+      <div ref={glareRef} className="absolute inset-0 pointer-events-none rounded-2xl" style={{ transition: 'background 0.15s ease-out' }} />
     </div>
   );
 };
@@ -158,7 +148,6 @@ const AboutPage = () => {
   const navigate = useNavigate();
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
-      <GooseFollower />
       <button
         onClick={() => navigate('/')}
         className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
@@ -213,6 +202,10 @@ const AboutPage = () => {
         <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-700">
           "Forget the yen. Bet on the Ren." — Chenrui Zhang
         </blockquote>
+      </section>
+
+      <section className="mb-8">
+        <InteractiveScene />
       </section>
     </div>
   );
