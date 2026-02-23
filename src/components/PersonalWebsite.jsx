@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ChevronRight, ArrowLeft, BookOpen } from 'lucide-react';
 
@@ -22,151 +22,6 @@ import maskImg from '../assets/mask.png';
 import utilityEngImg from '../assets/utility-engineering.png';
 import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
-
-const InteractiveScene = () => {
-  const containerRef = useRef(null);
-  const frameRef = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const cW = container.offsetWidth;
-    const cH = 220;
-
-    const COLORS = [
-      '#c4664a', '#4a7ab5', '#8b5e3c', '#6b9070', '#9080a8',
-      '#b58b5a', '#c17f59', '#5b82a8', '#c4956e', '#9c4a4a',
-      '#4a8a6a', '#6a5a8a', '#a06840', '#7a5c3e', '#b07850',
-    ];
-
-    const shelves = [
-      { y: 68, count: Math.round(cW / 48) },
-      { y: 142, count: Math.round(cW / 50) },
-      { y: 210, count: Math.round(cW / 55) },
-    ];
-
-    const books = [];
-    let bookIdx = 0;
-
-    shelves.forEach((shelf) => {
-      const margin = 18;
-      const available = cW - 2 * margin;
-      const widths = [];
-      for (let i = 0; i < shelf.count; i++) widths.push(11 + Math.random() * 9);
-      const total = widths.reduce((a, b) => a + b, 0);
-      const gap = Math.max(1, (available - total) / (shelf.count - 1));
-
-      let cx = margin;
-      for (let i = 0; i < shelf.count; i++) {
-        const w = widths[i];
-        const h = 40 + Math.random() * 24;
-        const x = cx + w / 2;
-        const y = shelf.y - h / 2;
-        books.push({
-          restX: x, restY: y, x, y, vx: 0, vy: 0, w, h,
-          rotation: 0, color: COLORS[(bookIdx++) % COLORS.length],
-          el: null, idx: bookIdx,
-        });
-        cx += w + gap;
-      }
-    });
-
-    // Shelf lines
-    shelves.forEach((shelf) => {
-      const line = document.createElement('div');
-      line.style.cssText = `position:absolute;left:12px;right:12px;top:${shelf.y}px;height:3px;background:linear-gradient(90deg,#c4a882,#b09570,#c4a882);border-radius:1.5px;pointer-events:none;z-index:0;`;
-      container.appendChild(line);
-    });
-
-    // Book elements
-    books.forEach((book) => {
-      const el = document.createElement('div');
-      el.style.cssText = `position:absolute;width:${book.w}px;height:${book.h}px;background:${book.color};border-radius:1.5px 2px 1px 1px;will-change:transform;pointer-events:none;z-index:1;box-shadow:1px 1px 4px rgba(0,0,0,0.13);transform-origin:center bottom;`;
-      container.appendChild(el);
-      book.el = el;
-    });
-
-    let mouseX = -1000, mouseY = -1000;
-    const onMove = (e) => {
-      const r = container.getBoundingClientRect();
-      mouseX = e.clientX - r.left;
-      mouseY = e.clientY - r.top;
-    };
-    const onLeave = () => { mouseX = -1000; mouseY = -1000; };
-
-    if (!isTouch) {
-      container.addEventListener('mousemove', onMove);
-      container.addEventListener('mouseleave', onLeave);
-    }
-
-    const animate = () => {
-      const now = Date.now();
-      books.forEach((book) => {
-        const dx = book.x - mouseX;
-        const dy = book.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const radius = 110;
-
-        if (dist < radius && dist > 0.1) {
-          const force = (1 - dist / radius) * 2.8;
-          book.vx += (dx / dist) * force;
-          book.vy += (dy / dist) * force * 0.4;
-        }
-
-        // Spring
-        book.vx += (book.restX - book.x) * 0.035;
-        book.vy += (book.restY - book.y) * 0.045;
-
-        // Damping
-        book.vx *= 0.87;
-        book.vy *= 0.87;
-
-        // Idle sway
-        const idle = Math.sin(now * 0.0008 + book.idx * 0.7) * 0.15;
-
-        book.x += book.vx;
-        book.y += book.vy;
-
-        const dispX = book.x - book.restX;
-        book.rotation += (dispX * 0.7 + idle - book.rotation) * 0.13;
-
-        const tx = book.x - book.w / 2;
-        const ty = book.y - book.h / 2;
-        book.el.style.transform = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) rotate(${book.rotation.toFixed(2)}deg)`;
-      });
-      frameRef.current = requestAnimationFrame(animate);
-    };
-    frameRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(frameRef.current);
-      if (!isTouch) {
-        container.removeEventListener('mousemove', onMove);
-        container.removeEventListener('mouseleave', onLeave);
-      }
-      while (container.firstChild) container.removeChild(container.firstChild);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative mx-auto select-none cursor-default"
-      style={{
-        width: '100%',
-        maxWidth: '500px',
-        height: '220px',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        background: 'linear-gradient(180deg, #faf8f4 0%, #f5f0e8 100%)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-        border: '1px solid rgba(0,0,0,0.04)',
-      }}
-    />
-  );
-};
 
 const AboutPage = () => {
   const navigate = useNavigate();
@@ -228,9 +83,6 @@ const AboutPage = () => {
         </blockquote>
       </section>
 
-      <section className="mb-8">
-        <InteractiveScene />
-      </section>
     </div>
   );
 };
