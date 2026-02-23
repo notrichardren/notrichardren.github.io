@@ -168,6 +168,7 @@ const HomePage = () => {
       link: "https://arxiv.org/abs/2510.26787",
       details: [
         "Contributing researcher on the Remote Labor Index, in collaboration with Scale AI. A broadly multi-sector benchmark comprising 240 real-world, economically valuable projects sourced from freelance platforms, designed to evaluate end-to-end agent performance.",
+        <span key="coverage">Covered by the <a href="https://www.washingtonpost.com/technology/interactive/2026/ai-jobs-automation/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Washington Post</a>.</span>,
         <span key="links">Links: <a href="https://www.remotelabor.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://scale.com/research/rli" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Scale AI</a>.</span>,
         <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Remote+Labor+Index" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">4 citations</a></span>
       ],
@@ -192,7 +193,8 @@ const HomePage = () => {
       publication: "ICML 2025 Spotlight",
       link: "https://arxiv.org/abs/2502.08640",
       details: [
-        "Contributing researcher on Utility Engineering. Examines how goals and values emerge in large language models through utility function frameworks. Independently-sampled preferences in current LLMs exhibit high degrees of structural coherence that intensifies with scale.",
+        "Contributing researcher on Utility Engineering. We find LLMs have emergent and increasingly consistent value systems as they scale. Based on this finding, we introduce a new method to evaluate biases and LLMs.",
+        <span key="coverage">Cited by <a href="https://data.x.ai/2025-08-20-xai-risk-management-framework.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Risk Management Framework</a>. Covered by <a href="https://www.wired.com/story/xai-make-ai-more-like-trump/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Wired</a> and <a href="https://www.forbes.com/sites/lanceeliot/2025/02/28/ai-hiding-emergent-human-values-that-include-ai-survival-topping-human-lives/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Forbes</a>.</span>,
         <span key="links">Links: <a href="https://www.emergent-values.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a>.</span>,
         <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Utility+Engineering+Analyzing+Controlling+Emergent+Value" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">36 citations</a></span>
       ],
@@ -218,7 +220,7 @@ const HomePage = () => {
       link: "https://arxiv.org/abs/2407.21792",
       details: [
         "Co-led the most comprehensive empirical meta-analysis of AI safety benchmarks to date (co-1st author), collaborating with three research engineers and three external collaborators.",
-        <span key="invited"><a href="https://x.com/tomekkorbak/status/1828154620138660352" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Invited to present</a> at the UK Government AI Safety Institute. Cited by OpenAI, the Singapore Consensus on Global AI Safety Research Priorities, and featured in TechCrunch as research paper of the week.</span>,
+        <span key="invited"><a href="https://x.com/tomekkorbak/status/1828154620138660352" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Invited to present</a> at the UK Government AI Safety Institute. Cited by OpenAI, the Singapore Consensus on Global AI Safety Research Priorities, and featured in <a href="https://techcrunch.com/2024/08/04/many-safety-evaluations-for-ai-models-have-significant-limitations/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">TechCrunch</a> as research paper of the week.</span>,
         <span key="links">Links: <a href="https://www.safetywashing.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Website</a> | <a href="https://github.com/centerforaisafety/safetywashing" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Codebase</a> | <a href="https://x.com/notRichardRen/status/1819427976309780574" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Thread</a>.</span>,
         <span key="citations"><a href="https://scholar.google.com/scholar?cites=&as_sdt=2005&sciodt=0,5&hl=en&oi=gsb&q=Safetywashing+AI+Safety+Benchmarks" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:underline">49 citations</a></span>
       ],
@@ -338,8 +340,20 @@ const HomePage = () => {
               content: <><em>MASK Benchmark</em> cited in <a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Grok 4 model card</a>.</>
             },
             {
+              date: 'August 20, 2025',
+              content: <><em>Utility Engineering</em> cited in <a href="https://data.x.ai/2025-08-20-xai-risk-management-framework.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">xAI's Risk Management Framework</a>.</>
+            },
+            {
               date: 'May 8, 2025',
               content: <><em>Safetywashing</em> and <em>MASK Benchmark</em> cited by the <a href="https://arxiv.org/pdf/2506.20702" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Singapore Consensus</a> on Global AI Safety Research Priorities.</>
+            },
+            {
+              date: 'February 28, 2025',
+              content: <><em>Utility Engineering</em> covered by <a href="https://www.forbes.com/sites/lanceeliot/2025/02/28/ai-hiding-emergent-human-values-that-include-ai-survival-topping-human-lives/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Forbes</a>.</>
+            },
+            {
+              date: 'February 11, 2025',
+              content: <><em>Utility Engineering</em> covered by <a href="https://www.wired.com/story/xai-make-ai-more-like-trump/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Wired</a>.</>
             },
             {
               date: 'January 23, 2025',
@@ -351,7 +365,7 @@ const HomePage = () => {
             },
             {
               date: 'January 15, 2025',
-              content: <><em>Safetywashing</em> cited as "research paper of the week" in TechCrunch.</>
+              content: <><em>Safetywashing</em> cited as "research paper of the week" in <a href="https://techcrunch.com/2024/08/04/many-safety-evaluations-for-ai-models-have-significant-limitations/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">TechCrunch</a>.</>
             },
             {
               date: 'September 26, 2024',
