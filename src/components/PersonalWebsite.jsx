@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ChevronRight, ArrowLeft, BookOpen } from 'lucide-react';
 
@@ -23,6 +23,127 @@ import utilityEngImg from '../assets/utility-engineering.png';
 import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
 
+const InteractiveScene = () => {
+  const sceneRef = useRef(null);
+  const glareRef = useRef(null);
+
+  useEffect(() => {
+    const scene = sceneRef.current;
+    const glare = glareRef.current;
+    if (!scene) return;
+
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouch) return;
+
+    const handleMouseMove = (e) => {
+      const rect = scene.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      scene.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg)`;
+
+      const layers = scene.querySelectorAll('.scene-layer');
+      layers.forEach((layer, i) => {
+        const depth = (i + 1) * 6;
+        layer.style.transform = `translateX(${x * depth}px) translateY(${y * depth}px)`;
+      });
+
+      if (glare) {
+        glare.style.background = `radial-gradient(circle at ${50 + x * 80}% ${50 + y * 80}%, rgba(255,255,255,0.18) 0%, transparent 60%)`;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      scene.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg)';
+      const layers = scene.querySelectorAll('.scene-layer');
+      layers.forEach(layer => { layer.style.transform = 'translateX(0) translateY(0)'; });
+      if (glare) glare.style.background = 'transparent';
+    };
+
+    scene.addEventListener('mousemove', handleMouseMove);
+    scene.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      scene.removeEventListener('mousemove', handleMouseMove);
+      scene.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={sceneRef}
+      className="relative mx-auto rounded-2xl overflow-hidden cursor-default select-none"
+      style={{
+        width: '100%',
+        maxWidth: '480px',
+        height: '200px',
+        background: 'linear-gradient(170deg, #f0f4f8 0%, #e4ece6 50%, #d5e0cd 100%)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
+        transformStyle: 'preserve-3d',
+        transition: 'transform 0.15s ease-out',
+        border: '1px solid rgba(0,0,0,0.06)',
+      }}
+    >
+      {/* Layer 0: Books */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-3 left-6" width="100" height="90" viewBox="0 0 100 90" fill="none">
+          <rect x="5" y="12" width="13" height="55" rx="1.5" fill="#b5714d" stroke="#9a5f3e" strokeWidth="0.5" transform="rotate(-2, 11, 40)"/>
+          <rect x="20" y="5" width="11" height="62" rx="1.5" fill="#5b82a8" stroke="#4a6d8e" strokeWidth="0.5"/>
+          <rect x="33" y="18" width="15" height="49" rx="1.5" fill="#8b5e3c" stroke="#764f32" strokeWidth="0.5" transform="rotate(1, 40, 42)"/>
+          <rect x="50" y="8" width="12" height="59" rx="1.5" fill="#6b9070" stroke="#5a7a5e" strokeWidth="0.5"/>
+          <rect x="64" y="14" width="10" height="53" rx="1.5" fill="#9080a8" stroke="#7d6f95" strokeWidth="0.5" transform="rotate(-1, 69, 40)"/>
+          <rect x="76" y="20" width="14" height="47" rx="1.5" fill="#c4956e" stroke="#ab7f5c" strokeWidth="0.5" transform="rotate(2, 83, 44)"/>
+          {/* Shelf */}
+          <rect x="0" y="67" width="95" height="4" rx="1" fill="#c4a882" stroke="#b09570" strokeWidth="0.5"/>
+          <rect x="2" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
+          <rect x="89" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
+        </svg>
+      </div>
+
+      {/* Layer 1: Plant */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-2 right-6" width="70" height="100" viewBox="0 0 70 100" fill="none">
+          <path d="M22 62 L19 82 L51 82 L48 62 Z" fill="#c17f59" stroke="#a06840" strokeWidth="1"/>
+          <rect x="17" y="58" width="36" height="6" rx="2" fill="#d4916b" stroke="#b07850" strokeWidth="0.5"/>
+          <path d="M35 60 Q32 40 24 28" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q38 35 46 26" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q35 42 33 24" stroke="#4a7a3a" strokeWidth="1.5" fill="none"/>
+          <path d="M35 60 Q30 45 20 38" stroke="#5a8a4a" strokeWidth="1.2" fill="none"/>
+          <path d="M35 60 Q42 42 50 36" stroke="#4a7a3a" strokeWidth="1.2" fill="none"/>
+          <ellipse cx="22" cy="27" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(-35, 22, 27)"/>
+          <ellipse cx="48" cy="25" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(30, 48, 25)"/>
+          <ellipse cx="32" cy="22" rx="8" ry="4" fill="#7aba6a" opacity="0.85" transform="rotate(-8, 32, 22)"/>
+          <ellipse cx="18" cy="37" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(-45, 18, 37)"/>
+          <ellipse cx="52" cy="35" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(40, 52, 35)"/>
+          <ellipse cx="35" cy="30" rx="6" ry="3" fill="#82c472" opacity="0.7" transform="rotate(5, 35, 30)"/>
+        </svg>
+      </div>
+
+      {/* Layer 2: Goose */}
+      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
+        <svg className="absolute bottom-1" style={{ left: '50%', marginLeft: '-32px' }} width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <ellipse cx="32" cy="58" rx="16" ry="3" fill="rgba(0,0,0,0.04)"/>
+          <ellipse cx="32" cy="50" rx="18" ry="11" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <rect x="28" y="24" width="8" height="20" rx="4" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <ellipse cx="32" cy="20" rx="10" ry="9" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
+          <circle cx="27" cy="18" r="2" fill="#222"/>
+          <circle cx="37" cy="18" r="2" fill="#222"/>
+          <circle cx="26.4" cy="17.3" r="0.6" fill="#fff"/>
+          <circle cx="36.4" cy="17.3" r="0.6" fill="#fff"/>
+          <path d="M28 23 L32 27 L36 23 Z" fill="#e8941a" stroke="#c47a10" strokeWidth="1" strokeLinejoin="round"/>
+          <path d="M14 48 Q20 40 28 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
+          <path d="M50 48 Q44 40 36 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
+          <path d="M25 59 L22 63 M25 59 L25 63 M25 59 L28 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
+          <path d="M39 59 L36 63 M39 59 L39 63 M39 59 L42 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      {/* Glare overlay */}
+      <div ref={glareRef} className="absolute inset-0 pointer-events-none rounded-2xl" style={{ transition: 'background 0.15s ease-out' }} />
+    </div>
+  );
+};
+
 const AboutPage = () => {
   const navigate = useNavigate();
   return (
@@ -40,22 +161,12 @@ const AboutPage = () => {
         <p className="text-gray-700 mb-6">
           I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
-        <p className="text-gray-700">
-          I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and new potential research areas that the ML community is not focused on.
-        </p>
-      </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Why?</h2>
         <p className="text-gray-700 mb-6">
-          My inspiration and interest in AI safety research stems from reading <em>Human Compatible</em> and <em>Code</em> during my sophomore year of undergrad. I want to understand the implicit values encoded into AI systems. How we build AI systems may be the new law.
+          I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and new potential research areas that the ML community is not focused on.
         </p>
         <p className="text-gray-700">
           I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News.
         </p>
-        {/* <p className="text-gray-700">
-          I also co-run <a href="https://pennai.notion.site/SafeAI-Penn-Labs-a4f262c3061b46d2975667c97b964ad3" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">SafeAI@Penn</a>.
-        </p> */}
       </section>
 
       <section className="mb-12">
@@ -91,6 +202,10 @@ const AboutPage = () => {
         <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-700">
           "Forget the yen. Bet on the Ren." — Chenrui Zhang
         </blockquote>
+      </section>
+
+      <section className="mb-8">
+        <InteractiveScene />
       </section>
     </div>
   );
@@ -285,8 +400,11 @@ const HomePage = () => {
         <p className="text-lg text-gray-700 mb-4">
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
-        <p className="text-lg text-gray-700 mb-6">
+        <p className="text-lg text-gray-700 mb-4">
           I have co-led the most comprehensive empirical meta-analysis of AI safety benchmarks to date (<a href="https://arxiv.org/abs/2407.21792" className="text-blue-600 hover:underline">Safetywashing</a>, NeurIPS '24) as well as the development of an AI honesty benchmark (<a href="https://arxiv.org/abs/2503.03750" className="text-blue-600 hover:underline">MASK</a>). My co-1st-authored work has been presented at the UK Government AI Safety Institute (by invitation), cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on AI Safety Priorities, and used by researchers at xAI (<a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" className="text-blue-600 hover:underline">1</a>), OpenAI (<a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" className="text-blue-600 hover:underline">1</a>, <a href="https://cdn.openai.com/papers/trading-inference-time-compute-for-adversarial-robustness-20250121_1.pdf" className="text-blue-600 hover:underline">2</a>), and Anthropic (<a href="https://alignment.anthropic.com/2025/honesty-elicitation/" className="text-blue-600 hover:underline">1</a>).
+        </p>
+        <p className="text-lg text-gray-700 mb-6">
+          I wrote a series of concrete, falsifiable predictions on the future of AI <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">here</a>.
         </p>
         <button
           onClick={() => navigate('/about')}
