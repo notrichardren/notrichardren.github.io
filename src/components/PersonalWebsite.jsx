@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Github, Linkedin, Twitter, ChevronDown, ChevronUp, ChevronRight, ArrowLeft, BookOpen } from 'lucide-react';
 
@@ -23,10 +23,142 @@ import utilityEngImg from '../assets/utility-engineering.png';
 import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
 
+const GooseFollower = () => {
+  const containerRef = useRef(null);
+  const flipRef = useRef(null);
+  const waddleRef = useRef(null);
+  const posRef = useRef({ x: 0, y: 0 });
+  const targetRef = useRef({ x: 0, y: 0 });
+  const movingRef = useRef(false);
+  const initializedRef = useRef(false);
+  const [showHonk, setShowHonk] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouch) return;
+
+    const showTimer = setTimeout(() => setVisible(true), 500);
+
+    const handleMouseMove = (e) => {
+      if (!initializedRef.current) {
+        posRef.current = { x: e.clientX, y: e.clientY + 80 };
+        initializedRef.current = true;
+      }
+      targetRef.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    let animFrame;
+    const animate = () => {
+      const container = containerRef.current;
+      const flip = flipRef.current;
+      const waddle = waddleRef.current;
+      if (!container || !flip || !waddle || !initializedRef.current) {
+        animFrame = requestAnimationFrame(animate);
+        return;
+      }
+
+      const dx = targetRef.current.x - posRef.current.x;
+      const dy = targetRef.current.y - posRef.current.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > 48) {
+        posRef.current.x += dx * 0.02;
+        posRef.current.y += dy * 0.02;
+        if (Math.abs(dx) > 2) {
+          flip.style.transform = dx > 0 ? 'scaleX(1)' : 'scaleX(-1)';
+        }
+        if (!movingRef.current) {
+          movingRef.current = true;
+          waddle.classList.add('goose-waddling');
+        }
+      } else {
+        if (movingRef.current) {
+          movingRef.current = false;
+          waddle.classList.remove('goose-waddling');
+        }
+      }
+
+      container.style.left = (posRef.current.x - 24) + 'px';
+      container.style.top = (posRef.current.y - 24) + 'px';
+
+      animFrame = requestAnimationFrame(animate);
+    };
+    animFrame = requestAnimationFrame(animate);
+
+    let active = true;
+    let honkTimer;
+    const scheduleHonk = () => {
+      honkTimer = setTimeout(() => {
+        if (!active) return;
+        if (!movingRef.current) {
+          setShowHonk(true);
+          setTimeout(() => { if (active) setShowHonk(false); }, 1500);
+        }
+        scheduleHonk();
+      }, 6000 + Math.random() * 8000);
+    };
+    scheduleHonk();
+
+    return () => {
+      active = false;
+      clearTimeout(showTimer);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animFrame);
+      clearTimeout(honkTimer);
+    };
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div ref={containerRef} className="fixed pointer-events-none" style={{ zIndex: 9999, left: -100, top: -100 }}>
+      <div ref={flipRef}>
+        <div ref={waddleRef} style={{ width: 48, height: 48 }}>
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <ellipse cx="22" cy="44" rx="10" ry="2.5" fill="rgba(0,0,0,0.06)"/>
+            <ellipse cx="20" cy="30" rx="13" ry="8.5" fill="#f5f2eb" stroke="#555" strokeWidth="1"/>
+            <path d="M7 27 L4 22 L9 26" fill="#e8e5dc" stroke="#555" strokeWidth="0.8"/>
+            <ellipse cx="18" cy="28" rx="7" ry="4" fill="#eae7e0" stroke="#555" strokeWidth="0.7"/>
+            <path d="M30 25 Q34 18 32 8" stroke="#555" strokeWidth="5" fill="none" strokeLinecap="round"/>
+            <path d="M30 25 Q34 18 32 8" stroke="#f5f2eb" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+            <circle cx="32" cy="7" r="5" fill="#f5f2eb" stroke="#555" strokeWidth="1"/>
+            <circle cx="34.5" cy="6" r="1.2" fill="#222"/>
+            <circle cx="34.2" cy="5.6" r="0.35" fill="#fff"/>
+            <path d="M36.5 7.5 L42 8 L36.5 10" fill="#e8941a" stroke="#c47a10" strokeWidth="0.7" strokeLinejoin="round"/>
+            <line x1="16" y1="37" x2="15" y2="42" stroke="#e8941a" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="24" y1="37" x2="25" y2="42" stroke="#e8941a" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M12 42 L15 42 L18 42" stroke="#e8941a" strokeWidth="1.2" strokeLinecap="round"/>
+            <path d="M22 42 L25 42 L28 42" stroke="#e8941a" strokeWidth="1.2" strokeLinecap="round"/>
+          </svg>
+        </div>
+      </div>
+      {showHonk && (
+        <div className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap select-none"
+          style={{
+            background: 'white',
+            borderRadius: '12px',
+            padding: '2px 8px',
+            fontSize: '11px',
+            fontWeight: 'bold',
+            fontFamily: 'serif',
+            color: '#444',
+            border: '1px solid #ddd',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          }}>
+          HONK!
+        </div>
+      )}
+    </div>
+  );
+};
+
 const AboutPage = () => {
   const navigate = useNavigate();
   return (
     <div className="max-w-3xl mx-auto px-6 py-8 font-serif">
+      <GooseFollower />
       <button
         onClick={() => navigate('/')}
         className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
@@ -40,22 +172,12 @@ const AboutPage = () => {
         <p className="text-gray-700 mb-6">
           I'm an experimentalist at heart. My research style is quick, iterative, and empirically-driven. I like to continually re-prioritize, remodel my worldview, and minimize entropy quickly. I've found my findings are <a href="https://paulgraham.com/relres.html" className="text-blue-600 hover:underline">bottlenecked by iteration speed</a>: the faster you move, the more creative and unusual you can get.
         </p>
-        <p className="text-gray-700">
-          I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and new potential research areas that the ML community is not focused on.
-        </p>
-      </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Why?</h2>
         <p className="text-gray-700 mb-6">
-          My inspiration and interest in AI safety research stems from reading <em>Human Compatible</em> and <em>Code</em> during my sophomore year of undergrad. I want to understand the implicit values encoded into AI systems. How we build AI systems may be the new law.
+          I also like focusing on <a href="https://paulgraham.com/smart.html" className="text-blue-600 hover:underline">understudied directions</a> and new potential research areas that the ML community is not focused on.
         </p>
         <p className="text-gray-700">
           I've been called a RAISIN (Responsible AI Safety and INterpretability researcher) by an <a href="https://vgel.me/posts/representation-engineering/" className="text-blue-600 hover:underline">article</a> that reached the front page of Hacker News.
         </p>
-        {/* <p className="text-gray-700">
-          I also co-run <a href="https://pennai.notion.site/SafeAI-Penn-Labs-a4f262c3061b46d2975667c97b964ad3" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">SafeAI@Penn</a>.
-        </p> */}
       </section>
 
       <section className="mb-12">
@@ -285,8 +407,11 @@ const HomePage = () => {
         <p className="text-lg text-gray-700 mb-4">
           I work on research and special projects at the Center for AI Safety, advised by <a href="https://scholar.google.com/citations?user=czyretsAAAAJ&hl=en" className="text-blue-600 hover:underline">Dan Hendrycks</a>.
         </p>
-        <p className="text-lg text-gray-700 mb-6">
+        <p className="text-lg text-gray-700 mb-4">
           I have co-led the most comprehensive empirical meta-analysis of AI safety benchmarks to date (<a href="https://arxiv.org/abs/2407.21792" className="text-blue-600 hover:underline">Safetywashing</a>, NeurIPS '24) as well as the development of an AI honesty benchmark (<a href="https://arxiv.org/abs/2503.03750" className="text-blue-600 hover:underline">MASK</a>). My co-1st-authored work has been presented at the UK Government AI Safety Institute (by invitation), cited by the <a href="https://arxiv.org/pdf/2506.20702" className="text-blue-600 hover:underline">Singapore Consensus</a> on AI Safety Priorities, and used by researchers at xAI (<a href="https://data.x.ai/2025-08-20-grok-4-model-card.pdf" className="text-blue-600 hover:underline">1</a>), OpenAI (<a href="https://openai.notion.site/Research-directions-0df8dd8136004615b0936bf48eb6aeb8" className="text-blue-600 hover:underline">1</a>, <a href="https://cdn.openai.com/papers/trading-inference-time-compute-for-adversarial-robustness-20250121_1.pdf" className="text-blue-600 hover:underline">2</a>), and Anthropic (<a href="https://alignment.anthropic.com/2025/honesty-elicitation/" className="text-blue-600 hover:underline">1</a>).
+        </p>
+        <p className="text-lg text-gray-700 mb-6">
+          I wrote a series of concrete, falsifiable predictions on the future of AI <a href="https://richardren.substack.com/p/predictions-on-ai-20262060" className="text-blue-600 hover:underline">here</a>.
         </p>
         <button
           onClick={() => navigate('/about')}
