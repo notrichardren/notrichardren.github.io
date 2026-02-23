@@ -24,123 +24,147 @@ import hleImg from '../assets/hle.png';
 import rliImg from '../assets/rli.png';
 
 const InteractiveScene = () => {
-  const sceneRef = useRef(null);
-  const glareRef = useRef(null);
+  const containerRef = useRef(null);
+  const frameRef = useRef(null);
 
   useEffect(() => {
-    const scene = sceneRef.current;
-    const glare = glareRef.current;
-    if (!scene) return;
+    const container = containerRef.current;
+    if (!container) return;
 
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouch) return;
+    const cW = container.offsetWidth;
+    const cH = 220;
 
-    const handleMouseMove = (e) => {
-      const rect = scene.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const COLORS = [
+      '#c4664a', '#4a7ab5', '#8b5e3c', '#6b9070', '#9080a8',
+      '#b58b5a', '#c17f59', '#5b82a8', '#c4956e', '#9c4a4a',
+      '#4a8a6a', '#6a5a8a', '#a06840', '#7a5c3e', '#b07850',
+    ];
 
-      scene.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 8}deg)`;
+    const shelves = [
+      { y: 68, count: Math.round(cW / 48) },
+      { y: 142, count: Math.round(cW / 50) },
+      { y: 210, count: Math.round(cW / 55) },
+    ];
 
-      const layers = scene.querySelectorAll('.scene-layer');
-      layers.forEach((layer, i) => {
-        const depth = (i + 1) * 6;
-        layer.style.transform = `translateX(${x * depth}px) translateY(${y * depth}px)`;
-      });
+    const books = [];
+    let bookIdx = 0;
 
-      if (glare) {
-        glare.style.background = `radial-gradient(circle at ${50 + x * 80}% ${50 + y * 80}%, rgba(255,255,255,0.18) 0%, transparent 60%)`;
+    shelves.forEach((shelf) => {
+      const margin = 18;
+      const available = cW - 2 * margin;
+      const widths = [];
+      for (let i = 0; i < shelf.count; i++) widths.push(11 + Math.random() * 9);
+      const total = widths.reduce((a, b) => a + b, 0);
+      const gap = Math.max(1, (available - total) / (shelf.count - 1));
+
+      let cx = margin;
+      for (let i = 0; i < shelf.count; i++) {
+        const w = widths[i];
+        const h = 40 + Math.random() * 24;
+        const x = cx + w / 2;
+        const y = shelf.y - h / 2;
+        books.push({
+          restX: x, restY: y, x, y, vx: 0, vy: 0, w, h,
+          rotation: 0, color: COLORS[(bookIdx++) % COLORS.length],
+          el: null, idx: bookIdx,
+        });
+        cx += w + gap;
       }
-    };
+    });
 
-    const handleMouseLeave = () => {
-      scene.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg)';
-      const layers = scene.querySelectorAll('.scene-layer');
-      layers.forEach(layer => { layer.style.transform = 'translateX(0) translateY(0)'; });
-      if (glare) glare.style.background = 'transparent';
-    };
+    // Shelf lines
+    shelves.forEach((shelf) => {
+      const line = document.createElement('div');
+      line.style.cssText = `position:absolute;left:12px;right:12px;top:${shelf.y}px;height:3px;background:linear-gradient(90deg,#c4a882,#b09570,#c4a882);border-radius:1.5px;pointer-events:none;z-index:0;`;
+      container.appendChild(line);
+    });
 
-    scene.addEventListener('mousemove', handleMouseMove);
-    scene.addEventListener('mouseleave', handleMouseLeave);
+    // Book elements
+    books.forEach((book) => {
+      const el = document.createElement('div');
+      el.style.cssText = `position:absolute;width:${book.w}px;height:${book.h}px;background:${book.color};border-radius:1.5px 2px 1px 1px;will-change:transform;pointer-events:none;z-index:1;box-shadow:1px 1px 4px rgba(0,0,0,0.13);transform-origin:center bottom;`;
+      container.appendChild(el);
+      book.el = el;
+    });
+
+    let mouseX = -1000, mouseY = -1000;
+    const onMove = (e) => {
+      const r = container.getBoundingClientRect();
+      mouseX = e.clientX - r.left;
+      mouseY = e.clientY - r.top;
+    };
+    const onLeave = () => { mouseX = -1000; mouseY = -1000; };
+
+    if (!isTouch) {
+      container.addEventListener('mousemove', onMove);
+      container.addEventListener('mouseleave', onLeave);
+    }
+
+    const animate = () => {
+      const now = Date.now();
+      books.forEach((book) => {
+        const dx = book.x - mouseX;
+        const dy = book.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const radius = 110;
+
+        if (dist < radius && dist > 0.1) {
+          const force = (1 - dist / radius) * 2.8;
+          book.vx += (dx / dist) * force;
+          book.vy += (dy / dist) * force * 0.4;
+        }
+
+        // Spring
+        book.vx += (book.restX - book.x) * 0.035;
+        book.vy += (book.restY - book.y) * 0.045;
+
+        // Damping
+        book.vx *= 0.87;
+        book.vy *= 0.87;
+
+        // Idle sway
+        const idle = Math.sin(now * 0.0008 + book.idx * 0.7) * 0.15;
+
+        book.x += book.vx;
+        book.y += book.vy;
+
+        const dispX = book.x - book.restX;
+        book.rotation += (dispX * 0.7 + idle - book.rotation) * 0.13;
+
+        const tx = book.x - book.w / 2;
+        const ty = book.y - book.h / 2;
+        book.el.style.transform = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) rotate(${book.rotation.toFixed(2)}deg)`;
+      });
+      frameRef.current = requestAnimationFrame(animate);
+    };
+    frameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      scene.removeEventListener('mousemove', handleMouseMove);
-      scene.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(frameRef.current);
+      if (!isTouch) {
+        container.removeEventListener('mousemove', onMove);
+        container.removeEventListener('mouseleave', onLeave);
+      }
+      while (container.firstChild) container.removeChild(container.firstChild);
     };
   }, []);
 
   return (
     <div
-      ref={sceneRef}
-      className="relative mx-auto rounded-2xl overflow-hidden cursor-default select-none"
+      ref={containerRef}
+      className="relative mx-auto select-none cursor-default"
       style={{
         width: '100%',
-        maxWidth: '480px',
-        height: '200px',
-        background: 'linear-gradient(170deg, #f0f4f8 0%, #e4ece6 50%, #d5e0cd 100%)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
-        transformStyle: 'preserve-3d',
-        transition: 'transform 0.15s ease-out',
-        border: '1px solid rgba(0,0,0,0.06)',
+        maxWidth: '500px',
+        height: '220px',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        background: 'linear-gradient(180deg, #faf8f4 0%, #f5f0e8 100%)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+        border: '1px solid rgba(0,0,0,0.04)',
       }}
-    >
-      {/* Layer 0: Books */}
-      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
-        <svg className="absolute bottom-3 left-6" width="100" height="90" viewBox="0 0 100 90" fill="none">
-          <rect x="5" y="12" width="13" height="55" rx="1.5" fill="#b5714d" stroke="#9a5f3e" strokeWidth="0.5" transform="rotate(-2, 11, 40)"/>
-          <rect x="20" y="5" width="11" height="62" rx="1.5" fill="#5b82a8" stroke="#4a6d8e" strokeWidth="0.5"/>
-          <rect x="33" y="18" width="15" height="49" rx="1.5" fill="#8b5e3c" stroke="#764f32" strokeWidth="0.5" transform="rotate(1, 40, 42)"/>
-          <rect x="50" y="8" width="12" height="59" rx="1.5" fill="#6b9070" stroke="#5a7a5e" strokeWidth="0.5"/>
-          <rect x="64" y="14" width="10" height="53" rx="1.5" fill="#9080a8" stroke="#7d6f95" strokeWidth="0.5" transform="rotate(-1, 69, 40)"/>
-          <rect x="76" y="20" width="14" height="47" rx="1.5" fill="#c4956e" stroke="#ab7f5c" strokeWidth="0.5" transform="rotate(2, 83, 44)"/>
-          {/* Shelf */}
-          <rect x="0" y="67" width="95" height="4" rx="1" fill="#c4a882" stroke="#b09570" strokeWidth="0.5"/>
-          <rect x="2" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
-          <rect x="89" y="71" width="4" height="18" rx="0.5" fill="#b09570"/>
-        </svg>
-      </div>
-
-      {/* Layer 1: Plant */}
-      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
-        <svg className="absolute bottom-2 right-6" width="70" height="100" viewBox="0 0 70 100" fill="none">
-          <path d="M22 62 L19 82 L51 82 L48 62 Z" fill="#c17f59" stroke="#a06840" strokeWidth="1"/>
-          <rect x="17" y="58" width="36" height="6" rx="2" fill="#d4916b" stroke="#b07850" strokeWidth="0.5"/>
-          <path d="M35 60 Q32 40 24 28" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
-          <path d="M35 60 Q38 35 46 26" stroke="#5a8a4a" strokeWidth="1.5" fill="none"/>
-          <path d="M35 60 Q35 42 33 24" stroke="#4a7a3a" strokeWidth="1.5" fill="none"/>
-          <path d="M35 60 Q30 45 20 38" stroke="#5a8a4a" strokeWidth="1.2" fill="none"/>
-          <path d="M35 60 Q42 42 50 36" stroke="#4a7a3a" strokeWidth="1.2" fill="none"/>
-          <ellipse cx="22" cy="27" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(-35, 22, 27)"/>
-          <ellipse cx="48" cy="25" rx="9" ry="4.5" fill="#6aaa5a" opacity="0.9" transform="rotate(30, 48, 25)"/>
-          <ellipse cx="32" cy="22" rx="8" ry="4" fill="#7aba6a" opacity="0.85" transform="rotate(-8, 32, 22)"/>
-          <ellipse cx="18" cy="37" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(-45, 18, 37)"/>
-          <ellipse cx="52" cy="35" rx="7" ry="3.5" fill="#5a9a4a" opacity="0.9" transform="rotate(40, 52, 35)"/>
-          <ellipse cx="35" cy="30" rx="6" ry="3" fill="#82c472" opacity="0.7" transform="rotate(5, 35, 30)"/>
-        </svg>
-      </div>
-
-      {/* Layer 2: Goose */}
-      <div className="scene-layer absolute inset-0" style={{ transition: 'transform 0.15s ease-out' }}>
-        <svg className="absolute bottom-1" style={{ left: '50%', marginLeft: '-32px' }} width="64" height="64" viewBox="0 0 64 64" fill="none">
-          <ellipse cx="32" cy="58" rx="16" ry="3" fill="rgba(0,0,0,0.04)"/>
-          <ellipse cx="32" cy="50" rx="18" ry="11" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
-          <rect x="28" y="24" width="8" height="20" rx="4" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
-          <ellipse cx="32" cy="20" rx="10" ry="9" fill="#f0ede6" stroke="#555" strokeWidth="1.2"/>
-          <circle cx="27" cy="18" r="2" fill="#222"/>
-          <circle cx="37" cy="18" r="2" fill="#222"/>
-          <circle cx="26.4" cy="17.3" r="0.6" fill="#fff"/>
-          <circle cx="36.4" cy="17.3" r="0.6" fill="#fff"/>
-          <path d="M28 23 L32 27 L36 23 Z" fill="#e8941a" stroke="#c47a10" strokeWidth="1" strokeLinejoin="round"/>
-          <path d="M14 48 Q20 40 28 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
-          <path d="M50 48 Q44 40 36 45" fill="#e0ddd4" stroke="#555" strokeWidth="1"/>
-          <path d="M25 59 L22 63 M25 59 L25 63 M25 59 L28 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
-          <path d="M39 59 L36 63 M39 59 L39 63 M39 59 L42 63" stroke="#e8941a" strokeWidth="2" strokeLinecap="round" fill="none"/>
-        </svg>
-      </div>
-
-      {/* Glare overlay */}
-      <div ref={glareRef} className="absolute inset-0 pointer-events-none rounded-2xl" style={{ transition: 'background 0.15s ease-out' }} />
-    </div>
+    />
   );
 };
 
